@@ -29,9 +29,15 @@ function App() {
             </header>
             {isLoading
                 ? <h2>Loading...</h2>
-                : <ul>
-                    {jobs.map((job, index) => <li key={index}>{job.company_name}</li>)}
-                </ul>}
+                : <div>
+                    <h2>First 10 results</h2>
+                    <hr />
+                    <ul>
+                        {jobs.map((job, index) => {
+                            return index < 10 && <li key={index}>{job.company_name}</li>
+                        })}
+                    </ul>
+                </div>}
         </div>
     );
 }

@@ -6,6 +6,8 @@ function App() {
         setJobs] = useState([]);
     const [isLoading,
         setIsLoading] = useState(true);
+    const [showAll,
+        setShowAll] = useState(false);
 
     const getJobs = async() => {
         try {
@@ -30,13 +32,24 @@ function App() {
             {isLoading
                 ? <h2>Loading...</h2>
                 : <div>
-                    <h2>First 10 results</h2>
-                    <hr />
+                    {!showAll && <h2>First 10 results</h2>}
+                    <hr/>
                     <ul>
                         {jobs.map((job, index) => {
                             return index < 10 && <li key={index}>{job.company_name}</li>
                         })}
                     </ul>
+
+                    {!showAll
+                        ? <div>
+                                <hr/>
+                                <button onClick={() => setShowAll(true)}>Show all...</button>
+                            </div>
+                        : <ul>
+                            {jobs.map((job, index) => {
+                                return index > 10 && <li key={index}>{job.company_name}</li>
+                            })}
+                        </ul>}
                 </div>}
         </div>
     );

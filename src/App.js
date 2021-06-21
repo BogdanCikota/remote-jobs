@@ -1,5 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import Job from "./components/Job";
 
 function App() {
     const [jobs,
@@ -36,7 +37,7 @@ function App() {
                     <hr/>
                     <ul>
                         {jobs.map((job, index) => {
-                            return index < 10 && <li key={index}>{job.company_name}</li>
+                            return index < 10 && <Job key={index} job={job}/>
                         })}
                     </ul>
 
@@ -47,7 +48,7 @@ function App() {
                             </div>
                         : <ul>
                             {jobs.map((job, index) => {
-                                return index > 10 && <li key={index}>{job.company_name}</li>
+                                return index > 10 && <Job key={index} job={job}/>
                             })}
                         </ul>}
                 </div>}

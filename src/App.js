@@ -8,8 +8,11 @@ function App() {
     const [isLoading,
         setIsLoading] = useState(true);
 
-    const [firstIndex, setFirstIndex] =useState(-1);
-    const [lastIndex, setLastIndex]  = useState(10);
+    const [fromIndex, setfromIndex] =useState(-1);
+    const [toIndex, settoIndex]  = useState(10);
+
+    const [pages, setPages] = useState([]);
+
   
 
     const getJobs = async() => {
@@ -18,6 +21,15 @@ function App() {
             console.log(response.data.jobs);
             setJobs(response.data.jobs);
             setIsLoading(false);
+
+            let pagesArr = []
+
+            for (let i = 0; i < response.data.jobs.length / 10; i++) {
+                pagesArr.push(i);
+            }
+
+            setPages(pagesArr);
+            
         } catch (error) {
             console.error(error);
         }
@@ -30,30 +42,39 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <h1 className='text-2xl text-center'>Job Listing App</h1>
+                <h1 className='text-2xl text-center'>Remote Jobs</h1>
             </header>
+            
             {isLoading
                 ? <h2>Loading...</h2>
-                : <div>
-                    { <h2>First 10 results</h2>}
-                    <hr/>
+                : <div>                    
                     <ul>
                         {jobs.map((job, index) => {
-                            return index > firstIndex && index < lastIndex && <Job key={index} job={job}/>
+                            return index > fromIndex && index < toIndex && <Job key={index} job={job}/>
                         })}
                     </ul>
                     <hr/>
-                    {firstIndex === -1 ? <button disabled>prev 10</button> : 
+                    {fromIndex === -1 ? <button disabled>prev 10</button> : 
                     <button onClick={()=>{
-                        setFirstIndex(firstIndex-10);
-                        setLastIndex(lastIndex-10);
+                        setfromIndex(fromIndex-10);
+                        settoIndex(toIndex-10);
                     }}>prev 10</button>}
+
+                    <hr/>
+   
+
+                    {
+                        pages.map((page, index) => <button className='inline-block' key={index} onClick={()=>{
+                            setfromIndex(page*10-1);
+                            settoIndex(page*10+10);
+                        }}>{page+1},</button> )
+                    }
                     
                     <hr/>
-                    {lastIndex > jobs.length-1 ? <button disabled>next 10</button> :
+                    {toIndex > jobs.length-1 ? <button disabled>next 10</button> :
                      <button onClick={()=>{
-                        setFirstIndex(firstIndex+10);
-                        setLastIndex(lastIndex+10);
+                        setfromIndex(fromIndex+10);
+                        settoIndex(toIndex+10);
                     }}>next 10</button>}
                     
                 </div>}

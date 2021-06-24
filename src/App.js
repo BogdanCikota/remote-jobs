@@ -14,6 +14,7 @@ function App() {
     const [fromHundred, setfromHundred] = useState(false);
     const [fromTwoHundred, setfromTwoHundred] = useState(false);
     const [pageNum, setPageNum] = useState(1);
+    const [pagesCounter, setpagesCounter] = useState(0);
 
 
     const getJobs = async() => {
@@ -28,6 +29,8 @@ function App() {
             for (let i = 0; i < response.data.jobs.length / 10; i++) {
                 pagesArr.push(i);
             }
+
+            setpagesCounter(pagesArr.length);
 
             setPages(pagesArr);
 
@@ -78,15 +81,15 @@ function App() {
                             setfromHundred(false);
                             setfromTwoHundred(false)
                         }}>1...100,</button>
-                        <button onClick={()=>{
+                        {pagesCounter > 100 && <button onClick={()=>{
                             setfromHundred(prev=>!prev);
                             setfromOne(false);
-                        }}>100...200,</button>
-                        <button onClick={()=>{
+                        }}>100...200,</button>}
+                        {pagesCounter > 200 &&<button onClick={()=>{
                             setfromTwoHundred(prev=>!prev)
                             setfromOne(false);
                             setfromHundred(false)
-                        }}>200...</button>
+                        }}>200...</button>}
                     </div>
 
                     <hr />

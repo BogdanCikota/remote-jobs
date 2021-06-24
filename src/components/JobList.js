@@ -19,11 +19,11 @@ function JobList({pages, jobs, pagesCounter} ) {
     return (
         <div>
             <h2 >Page <span className='pageNum'>{pageNum}</span> </h2>                    
-            <ul>
+            <div>
                 {jobs.map((job, index) => {
                     return index > fromIndex && index < toIndex && <Job key={index} job={job}/>
                 })}
-            </ul>
+            </div>
             <hr/>
             {fromIndex === -1 ? <button disabled>prev 10</button> : 
             <button onClick={()=>{

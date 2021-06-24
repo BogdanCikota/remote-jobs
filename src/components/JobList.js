@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import Job from "./Job";
 import chunk from 'lodash.chunk';
+import Page from "./Page";
 
 function JobList({pages, jobs, pagesCounter} ) {
     const [fromIndex, setfromIndex] =useState(-1);
@@ -56,27 +57,9 @@ function JobList({pages, jobs, pagesCounter} ) {
             <hr />
 
             {
-                fromOne ?  chunkedPages.map((chunk, index)=> index === 0 && <div className='inline-block' key={index}>{chunk.map((page, index) => {
-                return <button className='inline-block' key={index} onClick={()=>{
-                        setPageNum(page+1);
-                        setfromIndex(page*10-1);
-                        settoIndex(page*10+10);
-                    }}>{page+1},</button>
-                } )},</div> ) :
-                fromHundred ? chunkedPages.map((chunk, index)=> index === 1 && <div className='inline-block' key={index}>{chunk.map((page, index) => {
-                    return <button className='inline-block' key={index} onClick={()=>{
-                        setPageNum(page+1);
-                            setfromIndex(page*10-1);
-                            settoIndex(page*10+10);
-                        }}>{page+1},</button>
-                    } )},</div> ) :
-                fromTwoHundred && chunkedPages.map((chunk, index)=> index === 2 && <div className='inline-block' key={index}>{chunk.map((page, index) => {
-                    return <button className='inline-block' key={index} onClick={()=>{
-                        setPageNum(page+1);
-                            setfromIndex(page*10-1);
-                            settoIndex(page*10+10);
-                        }}>{page+1},</button>
-                    } )},</div> )
+                fromOne ? chunkedPages.map((chunk, index)=> index === 0 && <Page key={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} /> ) :
+                fromHundred ? chunkedPages.map((chunk, index)=> index === 1 && <Page key={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} /> ) :
+                fromTwoHundred && chunkedPages.map((chunk, index)=> index === 2 && <Page key={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} />)
             }
 
             <hr/>

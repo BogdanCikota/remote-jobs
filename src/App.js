@@ -13,6 +13,7 @@ function App() {
     const [fromOne, setfromOne] = useState(false);
     const [fromHundred, setfromHundred] = useState(false);
     const [fromTwoHundred, setfromTwoHundred] = useState(false);
+    const [pageNum, setPageNum] = useState(1);
 
 
     const getJobs = async() => {
@@ -51,7 +52,8 @@ function App() {
             
             {isLoading
                 ? <h2>Loading...</h2>
-                : <div>                    
+                : <div>
+                    <h2 >Page <span className='pageNum'>{pageNum}</span> </h2>                    
                     <ul>
                         {jobs.map((job, index) => {
                             return index > fromIndex && index < toIndex && <Job key={index} job={job}/>
@@ -60,6 +62,9 @@ function App() {
                     <hr/>
                     {fromIndex === -1 ? <button disabled>prev 10</button> : 
                     <button onClick={()=>{
+                        setPageNum(()=>{
+                           return document.querySelector('.pageNum').innerHTML-1
+                        });
                         setfromIndex(fromIndex-10);
                         settoIndex(toIndex-10);
                     }}>prev 10</button>}
@@ -89,18 +94,21 @@ function App() {
                     {
                        fromOne ?  chunkedPages.map((chunk, index)=> index === 0 && <div className='inline-block' key={index}>{chunk.map((page, index) => {
                         return <button className='inline-block' key={index} onClick={()=>{
+                                setPageNum(page+1);
                                setfromIndex(page*10-1);
                                settoIndex(page*10+10);
                            }}>{page+1},</button>
                        } )},</div> ) :
                         fromHundred ? chunkedPages.map((chunk, index)=> index === 1 && <div className='inline-block' key={index}>{chunk.map((page, index) => {
                             return <button className='inline-block' key={index} onClick={()=>{
+                                setPageNum(page+1);
                                    setfromIndex(page*10-1);
                                    settoIndex(page*10+10);
                                }}>{page+1},</button>
                            } )},</div> ) :
                         fromTwoHundred && chunkedPages.map((chunk, index)=> index === 2 && <div className='inline-block' key={index}>{chunk.map((page, index) => {
                             return <button className='inline-block' key={index} onClick={()=>{
+                                setPageNum(page+1);
                                    setfromIndex(page*10-1);
                                    settoIndex(page*10+10);
                                }}>{page+1},</button>
@@ -110,6 +118,9 @@ function App() {
                     <hr/>
                     {toIndex > jobs.length-1 ? <button disabled>next 10</button> :
                      <button onClick={()=>{
+                        setPageNum(()=>{
+                            return +document.querySelector('.pageNum').innerHTML + +1
+                         });
                         setfromIndex(fromIndex+10);
                         settoIndex(toIndex+10);
                     }}>next 10</button>}

@@ -7,10 +7,11 @@ function App() {
     const [isLoading, setIsLoading] = useState(true);
     const [pagesCounter, setpagesCounter] = useState(0);
     const [pages, setPages] = useState([]);
+    const [limit, setLimit] = useState('all');
 
     const getJobs = async() => {
         try {
-            const response = await axios.get('https://remotive.io/api/remote-jobs');
+            const response = await axios.get(`https://remotive.io/api/remote-jobs?limit=${limit}`);
             console.log(response.data.jobs);
             setJobs(response.data.jobs);
             setIsLoading(false);
@@ -32,16 +33,23 @@ function App() {
 
     useEffect(() => {
         getJobs();
-    }, []);
+    }, [limit]);
 
     
 
     return (
         <div className="App">
             <header className="App-header">
-                <h1 className='text-2xl text-center'>Remote Jobs</h1>
+                <h1 className='text-2xl'>Remote Jobs</h1>
             </header>
-            
+
+            <label htmlFor="limit">Limit the number of job listing result</label>
+            <br />
+            <input className='border' type="number" name="" id="limit" min="1" onChange={ e => {
+                setLimit(e.target.value);
+                setIsLoading(true);
+            }} />
+          
             {isLoading
                 ? <h2>Loading...</h2>
                 : <JobList jobs={jobs} pages={pages} pagesCounter={pagesCounter} /> }

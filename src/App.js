@@ -1,6 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import JobList from "./components/JobList";
+import Filters from "./components/Filters";
 
 function App() {
     const [jobs, setJobs] = useState([]);
@@ -12,6 +13,7 @@ function App() {
     const [category, setCategory] = useState('');
    const [inputSearch, setInputSearch] = useState('');
    const [search, setSearch] = useState('');
+   const [openFilters, setOpenFilters] = useState(false);
 
 
     const getJobs = async() => {
@@ -62,38 +64,22 @@ function App() {
                 <h1 className='text-2xl'>Remote Jobs</h1>
             </header>
 
+            <button onClick={()=> setOpenFilters(openFilters => !openFilters)}> {openFilters ? <span>Hide</span>: <span>Show</span> } filters</button>
+
+            {
+                openFilters && 
+                <Filters 
+                setLimit={setLimit} 
+                setCategory={setCategory} 
+                setSearch={setSearch}
+                inputSearch={inputSearch}
+                setIsLoading={setIsLoading}
+                setInputSearch={setInputSearch}
+                setIsLoading={setIsLoading}
+                categories={categories}
+                />
+            }
             
-
-            
-            
-            <select onChange={(e)=>{
-                setCategory(e.target.value);
-                setIsLoading(true);
-            }}>
-                <option>Choose a job category</option>
-                {categories.map( (category, index) => <option key={index} value={category.slug} >{category.name}</option> )}
-            </select>
-
-            
-
-            <form onSubmit={e => {
-                e.preventDefault();
-                inputSearch !== '' && setSearch(inputSearch) && setIsLoading(true);
-            }}>
-            <label htmlFor="search">Search job listing title and description</label>
-            <input className='border' type="search" id="search"  onChange={ e => {
-                setInputSearch((e.target.value));
-            }} />
-            <button type="submit">Go!</button>
-            </form>
-
-           
-
-            <label htmlFor="limit">Limit the number of job listing result</label>
-            <input className='border' type="number"id="limit" min="1" onChange={ e => {
-                setLimit(e.target.value);
-                setIsLoading(true);
-            }} />
           
             {isLoading
                 ? <h2>Loading...</h2>

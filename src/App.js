@@ -80,6 +80,8 @@ function App() {
                 ? <h2>Loading...</h2>
                 : <JobList jobs={jobs} pages={pages} pagesCounter={pagesCounter} /> }
 
+                <hr />
+            <footer>API Source: <a href="https://remotive.io/" target="_blank">https://remotive.io/api-documentation</a></footer>
         </div>
     );
 }

@@ -18,6 +18,7 @@ function JobList({pages, jobs, pagesCounter} ) {
 
     return (
         <div>
+            <div>Found <span>{jobs.length} results</span></div>
             <h2 >Page <span className='pageNum'>{pageNum}</span> </h2>                    
             <div>
                 {jobs.map((job, index) => {

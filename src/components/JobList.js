@@ -37,7 +37,7 @@ function JobList({pages, jobs, pagesCounter} ) {
 
             <hr/>
 
-            <div>
+            {pagesCounter > 100 && <div>
                 <h2>pages</h2>
                 <button onClick={()=>{
                     setfromOne(prev=>!prev);
@@ -53,7 +53,7 @@ function JobList({pages, jobs, pagesCounter} ) {
                     setfromOne(false);
                     setfromHundred(false)
                 }}>200...</button>}
-            </div>
+            </div>}
 
             <hr />
 

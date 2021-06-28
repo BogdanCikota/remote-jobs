@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import JobList from "./components/JobList";
 import Filters from "./components/Filters";
+import Header from "./components/Header";
 
 function App() {
     const [jobs, setJobs] = useState([]);
@@ -14,10 +15,6 @@ function App() {
    const [inputSearch, setInputSearch] = useState('');
    const [search, setSearch] = useState('');
    const [openFilters, setOpenFilters] = useState(false);
-
-
-   
-
 
     const getCategories = async() => {
         try {
@@ -61,11 +58,9 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
-                <h1 className='text-2xl text-center'>Remote Jobs</h1>
-            </header>
+           <Header openFilters={openFilters} setOpenFilters={setOpenFilters} />
 
-            <button className='m-auto block' onClick={()=> setOpenFilters(openFilters => !openFilters)}> {openFilters ? <span>Hide</span>: <span>Show</span> } filters</button>
+            
 
             {
                 openFilters && 

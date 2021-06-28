@@ -16,27 +16,7 @@ function App() {
    const [openFilters, setOpenFilters] = useState(false);
 
 
-    const getJobs = async() => {
-        try {
-            const response = await axios.get(`https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`);
-            console.log(response.data.jobs);
-            setJobs(response.data.jobs);
-            setIsLoading(false);
-
-            let pagesArr = []
-
-            for (let i = 0; i < response.data.jobs.length / 10; i++) {
-                pagesArr.push(i);
-            }
-
-            setpagesCounter(pagesArr.length);
-
-            setPages(pagesArr);
-
-        } catch (error) {
-            console.error(error);
-        }
-    };
+   
 
 
     const getCategories = async() => {
@@ -52,6 +32,27 @@ function App() {
 
 
     useEffect(() => {
+         const getJobs = async() => {
+            try {
+                const response = await axios.get(`https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`);
+                console.log(response.data.jobs);
+                setJobs(response.data.jobs);
+                setIsLoading(false);
+
+                let pagesArr = []
+
+                for (let i = 0; i < response.data.jobs.length / 10; i++) {
+                    pagesArr.push(i);
+                }
+
+                setpagesCounter(pagesArr.length);
+
+                setPages(pagesArr);
+
+            } catch (error) {
+                console.error(error);
+            }
+        };
         getJobs();
         getCategories();
     }, [limit, category, search]);
@@ -61,10 +62,10 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                <h1 className='text-2xl'>Remote Jobs</h1>
+                <h1 className='text-2xl text-center'>Remote Jobs</h1>
             </header>
 
-            <button onClick={()=> setOpenFilters(openFilters => !openFilters)}> {openFilters ? <span>Hide</span>: <span>Show</span> } filters</button>
+            <button className='m-auto block' onClick={()=> setOpenFilters(openFilters => !openFilters)}> {openFilters ? <span>Hide</span>: <span>Show</span> } filters</button>
 
             {
                 openFilters && 
@@ -75,7 +76,6 @@ function App() {
                 inputSearch={inputSearch}
                 setIsLoading={setIsLoading}
                 setInputSearch={setInputSearch}
-                setIsLoading={setIsLoading}
                 categories={categories}
                 />
             }
@@ -86,7 +86,7 @@ function App() {
                 : <JobList jobs={jobs} pages={pages} pagesCounter={pagesCounter} /> }
 
                 <hr />
-            <footer>API Source: <a href="https://remotive.io/" target="_blank">https://remotive.io/api-documentation</a></footer>
+            <footer>API Source: <a href="https://remotive.io/" rel="noreferrer" target="_blank">https://remotive.io/api-documentation</a></footer>
         </div>
     );
 }

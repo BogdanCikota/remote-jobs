@@ -57,10 +57,8 @@ function App() {
     
 
     return (
-        <div className="App">
+        <div className="max-w-sm m-auto">
            <Header openFilters={openFilters} setOpenFilters={setOpenFilters} />
-
-            
 
             {
                 openFilters && 

@@ -3,6 +3,8 @@ import axios from "axios";
 import JobList from "./components/JobList";
 import Filters from "./components/Filters";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
+
 
 function App() {
     const [jobs, setJobs] = useState([]);
@@ -79,7 +81,7 @@ function App() {
                 : <JobList jobs={jobs} pages={pages} pagesCounter={pagesCounter} /> }
 
                 <hr />
-            <footer>API Source: <a href="https://remotive.io/" rel="noreferrer" target="_blank">https://remotive.io/api-documentation</a></footer>
+                <Footer />
         </div>
     );
 }

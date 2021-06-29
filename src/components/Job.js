@@ -13,7 +13,7 @@ function Job({job, index}) {
             <div className='text-blue-900 font-semibold'>Job Type: {job.job_type ? <span className='font-normal'>{job.job_type}</span> : <span>/</span> } </div>
             <div className='text-blue-900 font-semibold'>Published: <span className='font-normal'>{job.publication_date}</span> </div>
             <button className='text-blue-900 underline' onClick={()=> setReadMore(prev=>!prev)}>Read more...</button>
-            {readMore && <div dangerouslySetInnerHTML={{ __html: jobDescription }}></div>}
+            {readMore && <div className='job-description' dangerouslySetInnerHTML={{ __html: jobDescription }}></div>}
         </div>
     )
 }

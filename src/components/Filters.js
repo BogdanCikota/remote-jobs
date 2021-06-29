@@ -20,7 +20,7 @@ function Filters({categories, setLimit, setCategory, setSearch, inputSearch, set
                 <input className='pl-2 border' type="search" id="search"  onChange={ e => {
                     setInputSearch((e.target.value));
                 }} />
-                <button type="submit">Go!</button>
+                <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' type="submit">Go!</button>
             </form>
 
            <div className='border p-2 grid gap-1'>

@@ -17,7 +17,7 @@ function Filters({categories, setLimit, setCategory, setSearch, inputSearch, set
                 setIsLoading(true);
             }} className='border p-2'>
                 <label className='mb-2 block'  htmlFor="search">Search job listing title and description</label>
-                <input className='border' type="search" id="search"  onChange={ e => {
+                <input className='pl-2 border' type="search" id="search"  onChange={ e => {
                     setInputSearch((e.target.value));
                 }} />
                 <button type="submit">Go!</button>

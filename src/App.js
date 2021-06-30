@@ -4,6 +4,8 @@ import JobList from "./components/JobList";
 import Filters from "./components/Filters";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { HashRouter, Route, Switch } from "react-router-dom";
+import JobDescription from "./components/JobDescription";
 
 
 function App() {
@@ -59,6 +61,8 @@ function App() {
     
 
     return (
+
+        <HashRouter basemname='/'>
         <div className="max-w-sm m-auto">
            <Header openFilters={openFilters} setOpenFilters={setOpenFilters} />
 
@@ -78,11 +82,21 @@ function App() {
           
             {isLoading
                 ? <h2>Loading...</h2>
-                : <JobList jobs={jobs} pages={pages} pagesCounter={pagesCounter} /> }
+                : 
+                    <Switch>
+                    <Route exact path="/">
+                     <JobList jobs={jobs} pages={pages} pagesCounter={pagesCounter} /> 
+                    </Route>
+                    <Route exact path="/JobDescription" component={JobDescription} />
+                    </Switch>
+                
+                }
 
                 <hr />
                 <Footer />
         </div>
+    </HashRouter>
+   
     );
 }
 

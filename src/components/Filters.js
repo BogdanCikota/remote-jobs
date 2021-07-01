@@ -8,7 +8,9 @@ function Filters({categories, setLimit, setCategory, setSearch, inputSearch, set
                 setIsLoading(true);
             }}>
                 <option>Choose a job category</option>
-                {categories.map( (category, index) => <option key={index} value={category.slug} >{category.name}</option> )}
+                <option>All jobs</option>
+                {categories.map( (category, index) => <option key={index} value={category.slug} >{category.name}</option>
+                 )}
             </select>
 
             <form onSubmit={e => {

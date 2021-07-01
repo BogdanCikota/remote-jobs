@@ -10,7 +10,7 @@ function Job({job, index}) {
             <div className='text-blue-900 font-semibold'>Required location: {job.candidate_required_location === '' ? <span>/</span> : <span className='font-normal'>{job.candidate_required_location}</span> } </div>
             <div className='text-blue-900 font-semibold'>Job Type: {job.job_type ? <span className='font-normal'>{job.job_type}</span> : <span>/</span> } </div>
             <div className='text-blue-900 font-semibold'>Published: <span className='font-normal'>{job.publication_date}</span> </div>
-            <Link to={{pathname:"/JobDescription", state: {description: job.description}}}>Read more...</Link>
+            <Link className='text-blue-900 font-semibold' to={{pathname:"/JobDescription", state: {description: job.description}}}>Read more...</Link>
         </div>
     )
 }

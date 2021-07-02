@@ -19,6 +19,10 @@ function App() {
    const [inputSearch, setInputSearch] = useState('');
    const [search, setSearch] = useState('');
    const [openFilters, setOpenFilters] = useState(false);
+   const [fromIndex, setfromIndex] =useState(-1);
+    const [toIndex, settoIndex]  = useState(10);
+    const [chunkedPages, setChunkedPages] = useState([]);
+    const [pageNum, setPageNum] = useState(1);
 
     const getCategories = async() => {
         try {
@@ -74,6 +78,9 @@ function App() {
                 setIsLoading={setIsLoading}
                 setInputSearch={setInputSearch}
                 categories={categories}
+                setfromIndex={setfromIndex}
+                settoIndex={settoIndex}
+                setPageNum={setPageNum}
                 />
                 
                 {isLoading
@@ -81,7 +88,19 @@ function App() {
                     : 
                         <Switch>
                         <Route exact path="/">
-                        <JobList jobs={jobs} pages={pages} pagesCounter={pagesCounter} /> 
+                        <JobList 
+                        jobs={jobs} 
+                        pages={pages} 
+                        pagesCounter={pagesCounter} 
+                        fromIndex={fromIndex} 
+                        setfromIndex={setfromIndex}
+                        toIndex={toIndex} 
+                        settoIndex={settoIndex}
+                        chunkedPages={chunkedPages} 
+                        setChunkedPages={setChunkedPages}
+                        pageNum={pageNum} 
+                        setPageNum={setPageNum}
+                        /> 
                         </Route>
                         <Route exact path="/JobDescription" component={JobDescription} />
                         </Switch>

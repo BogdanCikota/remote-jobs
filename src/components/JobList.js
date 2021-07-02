@@ -1,17 +1,15 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import Job from "./Job";
 import chunk from 'lodash.chunk';
 import Pagination from "./Pagination";
 
-function JobList({pages, jobs, pagesCounter} ) {
-    const [fromIndex, setfromIndex] =useState(-1);
-    const [toIndex, settoIndex]  = useState(10);
-    const [chunkedPages, setChunkedPages] = useState([]);
-    const [pageNum, setPageNum] = useState(1);
+function JobList({pages, jobs, pagesCounter, fromIndex, setfromIndex, toIndex, settoIndex,
+    chunkedPages, setChunkedPages, pageNum, setPageNum} ) {
+    
 
     useEffect(() => {
         setChunkedPages(chunk(pages, 100));
-    }, [pages]);
+    }, [pages, setChunkedPages]);
 
     return (
         <div className='grid gap-2'>

@@ -1,11 +1,15 @@
 import React from 'react'
 
-function Filters({categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading}) {
+function Filters({setfromIndex, settoIndex, setPageNum, categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading}) {
+    const resetPage = () => {
+        setfromIndex(-1); settoIndex(10); setPageNum(1);
+    };
     return (
         <div className='filters grid gap-3'>
             <select className='border p-1.5' onChange={(e)=>{
                 setCategory(e.target.value);
                 setIsLoading(true);
+                resetPage();
             }}>
                 <option>Choose a job category</option>
                 <option>All jobs</option>
@@ -17,6 +21,7 @@ function Filters({categories, setLimit, setCategory, setSearch, inputSearch, set
                 e.preventDefault();
                 setSearch(inputSearch);
                 setIsLoading(true);
+                resetPage();
             }} className='border p-2'>
                 <label className='mb-2 block'  htmlFor="search">Search job listing title and description</label>
                 <input className='pl-2 border' type="search" id="search"  onChange={ e => {
@@ -30,6 +35,7 @@ function Filters({categories, setLimit, setCategory, setSearch, inputSearch, set
                 <input className='border w-20' type="number" id="limit" min="1" onChange={ e => {
                     setLimit(e.target.value);
                     setIsLoading(true);
+                    resetPage();
                 }} /> <span>...will not work if all tree filters are selected, backend problem :(</span>
            </div>
         </div>

@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import JobDescription from "./components/JobDescription";
+import Loading from "./components/Loading";
 
 
 function App() {
@@ -84,25 +85,26 @@ function App() {
                 />
                 
                 {isLoading
-                    ? <h2>Loading...</h2>
-                    : 
+                    ? <Loading/>:
+
                         <Switch>
-                        <Route exact path="/">
-                        <JobList 
-                        jobs={jobs} 
-                        pages={pages} 
-                        pagesCounter={pagesCounter} 
-                        fromIndex={fromIndex} 
-                        setfromIndex={setfromIndex}
-                        toIndex={toIndex} 
-                        settoIndex={settoIndex}
-                        chunkedPages={chunkedPages} 
-                        setChunkedPages={setChunkedPages}
-                        pageNum={pageNum} 
-                        setPageNum={setPageNum}
-                        /> 
-                        </Route>
-                        <Route exact path="/JobDescription" component={JobDescription} />
+                            <Route exact path="/">
+                                <JobList 
+                                jobs={jobs} 
+                                pages={pages} 
+                                pagesCounter={pagesCounter} 
+                                fromIndex={fromIndex} 
+                                setfromIndex={setfromIndex}
+                                toIndex={toIndex} 
+                                settoIndex={settoIndex}
+                                chunkedPages={chunkedPages} 
+                                setChunkedPages={setChunkedPages}
+                                pageNum={pageNum} 
+                                setPageNum={setPageNum}
+                                /> 
+                            </Route>
+
+                            <Route exact path="/JobDescription" component={JobDescription} />
                         </Switch>
                     
                     }

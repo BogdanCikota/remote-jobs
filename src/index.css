@@ -44,9 +44,21 @@
 }
 
 
-.job-description {
-    color: rgba(30, 58, 138, 1);
+/* .job-description {
+	padding: 1rem;
 }
+*/
+
+/* .job-description {
+	
+} */
+
+.job-description > *, .job-description span, .job-description li, .job-description strong {
+    color: rgba(30, 58, 138, 1) !important;
+	font-size: 15px !important;
+	font-family: Arial, Helvetica, sans-serif !important;
+} 
+
 
 .job-description h1,
 .job-description h2,
@@ -66,12 +78,16 @@
 }
 
 .job-description a {
-    text-decoration: underline;
+    text-decoration: underline !important;
 }
 
 .job-description li {
-    list-style-type: circle;
-    margin-left: 1rem;
+    list-style-type: circle !important;
+    margin-left: 1rem !important;
+}
+
+.job-description br {
+	display: none;
 }
 
 .filters {

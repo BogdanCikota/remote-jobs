@@ -63,11 +63,9 @@ function App() {
     return (
 
         <HashRouter basemname='/'>
-        <div className="max-w-sm m-auto">
-           <Header openFilters={openFilters} setOpenFilters={setOpenFilters} />
-
-            {
-                openFilters && 
+            <div className="max-w-sm m-auto">
+                <Header openFilters={openFilters} setOpenFilters={setOpenFilters} />
+                
                 <Filters 
                 setLimit={setLimit} 
                 setCategory={setCategory} 
@@ -77,25 +75,23 @@ function App() {
                 setInputSearch={setInputSearch}
                 categories={categories}
                 />
-            }
-            
-          
-            {isLoading
-                ? <h2>Loading...</h2>
-                : 
-                    <Switch>
-                    <Route exact path="/">
-                     <JobList jobs={jobs} pages={pages} pagesCounter={pagesCounter} /> 
-                    </Route>
-                    <Route exact path="/JobDescription" component={JobDescription} />
-                    </Switch>
                 
-                }
+                {isLoading
+                    ? <h2>Loading...</h2>
+                    : 
+                        <Switch>
+                        <Route exact path="/">
+                        <JobList jobs={jobs} pages={pages} pagesCounter={pagesCounter} /> 
+                        </Route>
+                        <Route exact path="/JobDescription" component={JobDescription} />
+                        </Switch>
+                    
+                    }
 
-                <hr />
-                <Footer />
-        </div>
-    </HashRouter>
+                    <hr />
+                    <Footer />
+            </div>
+        </HashRouter>
    
     );
 }

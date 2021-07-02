@@ -2,7 +2,7 @@ import React from 'react'
 
 function Filters({categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading}) {
     return (
-        <div className='grid gap-3'>
+        <div className='filters grid gap-3'>
             <select className='border p-1.5' onChange={(e)=>{
                 setCategory(e.target.value);
                 setIsLoading(true);

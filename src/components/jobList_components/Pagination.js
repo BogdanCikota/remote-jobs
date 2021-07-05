@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Pages from "./pagination_components/Pages";
 import PrevButton from "./pagination_components/PrevButton";
+import NextButton from "./pagination_components/NextButton";
 
 function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, settoIndex, toIndex, pagesCounter, chunkedPages }) {
     const [fromOne, setfromOne] = useState(false);
@@ -27,15 +28,18 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
             }
 
             {/* next button */}
-            {toIndex > jobs.length-1 ? <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' disabled>next</button> :
-                <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
-                setPageNum(()=>{
-                    let pageNumCurrent = pageNumElement.innerHTML;
-                    return +pageNumCurrent + +1
-                    });
-                setfromIndex(fromIndex+numOfResults);
-                settoIndex(toIndex+numOfResults);
-            }}>next</button>}
+            {
+                toIndex > jobs.length-1 ? <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' disabled>next</button> :
+                <NextButton
+                setPageNum={setPageNum}
+                fromIndex={fromIndex} 
+                setfromIndex={setfromIndex}
+                toIndex={toIndex}
+                settoIndex={settoIndex}
+                pageNumElement={pageNumElement}
+                numOfResults={numOfResults}
+                />    
+            }
 
             {
                 // render pages buttons

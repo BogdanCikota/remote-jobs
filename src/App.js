@@ -17,13 +17,15 @@ function App() {
     const [limit, setLimit] = useState('all');
     const [categories, setCategories] = useState([]);
     const [category, setCategory] = useState('');
-   const [inputSearch, setInputSearch] = useState('');
-   const [search, setSearch] = useState('');
-   const [openFilters, setOpenFilters] = useState(false);
-   const [fromIndex, setfromIndex] =useState(-1);
-    const [toIndex, settoIndex]  = useState(10);
+    const [inputSearch, setInputSearch] = useState('');
+    const [search, setSearch] = useState('');
+    const [openFilters, setOpenFilters] = useState(false);
+    const [fromIndex, setfromIndex] =useState(0);
+    const numOfResults = 5;
+    const [toIndex, settoIndex]  = useState(numOfResults);
     const [chunkedPages, setChunkedPages] = useState([]);
     const [pageNum, setPageNum] = useState(1);
+    
 
     const getCategories = async() => {
         try {
@@ -47,7 +49,7 @@ function App() {
 
                 let pagesArr = []
 
-                for (let i = 0; i < response.data.jobs.length / 10; i++) {
+                for (let i = 0; i < response.data.jobs.length / numOfResults; i++) {
                     pagesArr.push(i);
                 }
 
@@ -82,6 +84,7 @@ function App() {
                 setfromIndex={setfromIndex}
                 settoIndex={settoIndex}
                 setPageNum={setPageNum}
+                numOfResults={numOfResults}
                 />
                 
                 {isLoading
@@ -101,6 +104,7 @@ function App() {
                                 setChunkedPages={setChunkedPages}
                                 pageNum={pageNum} 
                                 setPageNum={setPageNum}
+                                numOfResults={numOfResults}
                                 /> 
                             </Route>
 

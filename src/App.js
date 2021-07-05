@@ -21,7 +21,7 @@ function App() {
     const [search, setSearch] = useState('');
     const [openFilters, setOpenFilters] = useState(false);
     const [fromIndex, setfromIndex] =useState(0);
-    const numOfResults = 5;
+    const numOfResults = 7;
     const [toIndex, settoIndex]  = useState(numOfResults);
     const [chunkedPages, setChunkedPages] = useState([]);
     const [pageNum, setPageNum] = useState(1);

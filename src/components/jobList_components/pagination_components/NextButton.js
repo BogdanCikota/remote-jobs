@@ -1,5 +1,5 @@
 
-function NextButton({numOfResults, setPageNum, pageNumElement, fromIndex, setfromIndex, toIndex, settoIndex}) {
+function NextButton({goToTop, numOfResults, setPageNum, pageNumElement, fromIndex, setfromIndex, toIndex, settoIndex}) {
     return (
         <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
             setPageNum(()=>{
@@ -8,6 +8,7 @@ function NextButton({numOfResults, setPageNum, pageNumElement, fromIndex, setfro
                 });
             setfromIndex(fromIndex+numOfResults);
             settoIndex(toIndex+numOfResults);
+            goToTop();
         }}>next</button>
     )
 }

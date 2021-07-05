@@ -1,6 +1,6 @@
 import React from 'react'
 
-function PrevButton({numOfResults, setPageNum, pageNumElement, fromIndex, setfromIndex, toIndex, settoIndex}) {
+function PrevButton({goToTop, numOfResults, setPageNum, pageNumElement, fromIndex, setfromIndex, toIndex, settoIndex}) {
     return (
         <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
             setPageNum(()=>{
@@ -9,6 +9,7 @@ function PrevButton({numOfResults, setPageNum, pageNumElement, fromIndex, setfro
             });
             setfromIndex(fromIndex-numOfResults);
             settoIndex(toIndex-numOfResults);
+            goToTop();
         }}>prev</button>
     )
 }

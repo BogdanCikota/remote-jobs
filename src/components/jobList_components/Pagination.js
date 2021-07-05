@@ -10,9 +10,12 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
 
     const pageNumElement = document.querySelector('.pageNum');
 
+    const goToTop = () => {
+        window.scroll(0,0);
+    }
+
     return (
         <div className='grid gap-2'>
-            {/* prev button */}
             <div className='grid grid-cols-2'>
             {
                 fromIndex === 0 ? <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' disabled>prev</button> : 
@@ -24,10 +27,10 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
                 settoIndex={settoIndex}
                 pageNumElement={pageNumElement}
                 numOfResults={numOfResults}
+                goToTop={goToTop}
                 />
             }
 
-            {/* next button */}
             {
                 toIndex > jobs.length-1 ? <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' disabled>next</button> :
                 <NextButton
@@ -38,6 +41,7 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
                 settoIndex={settoIndex}
                 pageNumElement={pageNumElement}
                 numOfResults={numOfResults}
+                goToTop={goToTop}
                 />    
             }
 
@@ -52,6 +56,7 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
                 setfromIndex={setfromIndex} 
                 settoIndex={settoIndex}
                 numOfResults={numOfResults}
+                goToTop={goToTop}
                 /> )
             }
 
@@ -81,9 +86,9 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
 
             {
                 // render pages buttons when clicked from-to button
-                fromOne ? chunkedPages.map((chunk, index)=> index === 0 && <Pages key={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} numOfResults={numOfResults} /> ) :
-                fromHundred ? chunkedPages.map((chunk, index)=> index === 1 && <Pages key={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} numOfResults={numOfResults} /> ) :
-                fromTwoHundred && chunkedPages.map((chunk, index)=> index === 2 && <Pages key={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} numOfResults={numOfResults} />)
+                fromOne ? chunkedPages.map((chunk, index)=> index === 0 && <Pages key={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} numOfResults={numOfResults} goToTop={goToTop}/> ) :
+                fromHundred ? chunkedPages.map((chunk, index)=> index === 1 && <Pages key={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} numOfResults={numOfResults} goToTop={goToTop}/> ) :
+                fromTwoHundred && chunkedPages.map((chunk, index)=> index === 2 && <Pages key={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} numOfResults={numOfResults} goToTop={goToTop}/>)
             }
 
             

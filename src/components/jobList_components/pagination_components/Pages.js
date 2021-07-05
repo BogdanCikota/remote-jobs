@@ -1,5 +1,5 @@
 
-function Pages({numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
+function Pages({goToTop, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
     return (
         <div className='p-2 grid grid-cols-8 gap-2 col-span-full' >
             {   
@@ -11,6 +11,7 @@ function Pages({numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
                         setfromIndex(page*numOfResults);
 
                         settoIndex(page*numOfResults+numOfResults);
+                        goToTop();
                     }}>
                         {page+1}
                     </button>

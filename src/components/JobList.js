@@ -3,7 +3,7 @@ import Job from "./jobList_components/Job";
 import chunk from 'lodash.chunk';
 import Pagination from "./jobList_components/Pagination";
 
-function JobList({pages, jobs, pagesCounter, fromIndex, setfromIndex, toIndex, settoIndex,
+function JobList({goToPage, setgoToPage, pages, jobs, pagesCounter, fromIndex, setfromIndex, toIndex, settoIndex,
     chunkedPages, setChunkedPages, pageNum, setPageNum, numOfResults} ) {
     
 
@@ -23,19 +23,25 @@ function JobList({pages, jobs, pagesCounter, fromIndex, setfromIndex, toIndex, s
             </div>
             <hr/>
             
-            <Pagination 
-            fromIndex={fromIndex}
-            setfromIndex={setfromIndex}
-            toIndex={toIndex}
-            settoIndex={settoIndex}
-            chunkedPages={chunkedPages}
-            setChunkedPages={setChunkedPages}
-            pageNum={pageNum}
-            setPageNum={setPageNum}
-            jobs={jobs}
-            pagesCounter={pagesCounter}
-            numOfResults={numOfResults}
-             />
+            {
+                jobs.length > numOfResults  && 
+                
+                <Pagination 
+                fromIndex={fromIndex}
+                setfromIndex={setfromIndex}
+                toIndex={toIndex}
+                settoIndex={settoIndex}
+                chunkedPages={chunkedPages}
+                setChunkedPages={setChunkedPages}
+                pageNum={pageNum}
+                setPageNum={setPageNum}
+                jobs={jobs}
+                pagesCounter={pagesCounter}
+                numOfResults={numOfResults}
+                goToPage={goToPage}
+                setgoToPage={setgoToPage}
+                />
+            }
             
         </div>
     )

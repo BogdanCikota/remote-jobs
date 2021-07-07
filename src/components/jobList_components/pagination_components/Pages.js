@@ -1,7 +1,7 @@
 
 function Pages({goToTop, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
     return (
-        <div className='p-2 grid grid-cols-8 gap-2 col-span-full' >
+        <div className='p-2 grid grid-cols-7 gap-2' >
             {   
                 chunk.map((page, index) => {
                 return <button className='rounded-lg px-1  bg-blue-400 text-white' key={index} onClick={()=>{

@@ -25,6 +25,7 @@ function App() {
     const [toIndex, settoIndex]  = useState(numOfResults);
     const [chunkedPages, setChunkedPages] = useState([]);
     const [pageNum, setPageNum] = useState(1);
+    const [goToPage, setgoToPage] = useState(false);
     
 
     const getCategories = async() => {
@@ -85,6 +86,8 @@ function App() {
                 settoIndex={settoIndex}
                 setPageNum={setPageNum}
                 numOfResults={numOfResults}
+                goToPage={goToPage}
+                setgoToPage={setgoToPage}
                 />
                 
                 {isLoading
@@ -105,6 +108,8 @@ function App() {
                                 pageNum={pageNum} 
                                 setPageNum={setPageNum}
                                 numOfResults={numOfResults}
+                                goToPage={goToPage}
+                                setgoToPage={setgoToPage}
                                 /> 
                             </Route>
 

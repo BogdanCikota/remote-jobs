@@ -3,7 +3,7 @@ import Pages from "./pagination_components/Pages";
 import PrevButton from "./pagination_components/PrevButton";
 import NextButton from "./pagination_components/NextButton";
 
-function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, settoIndex, toIndex, pagesCounter, chunkedPages }) {
+function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPageNum, setfromIndex, settoIndex, toIndex, pagesCounter, chunkedPages }) {
     const [fromOne, setfromOne] = useState(false);
     const [fromHundred, setfromHundred] = useState(false);
     const [fromTwoHundred, setfromTwoHundred] = useState(false);
@@ -15,10 +15,9 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
     }
 
     return (
-        <div className='grid gap-2'>
-            <div className='grid grid-cols-2'>
-            {
-                fromIndex === 0 ? <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' disabled>prev</button> : 
+        <div >
+
+            <div className='flex gap-3 justify-center mb-1.5'>
                 <PrevButton 
                 setPageNum={setPageNum}
                 fromIndex={fromIndex} 
@@ -29,10 +28,33 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
                 numOfResults={numOfResults}
                 goToTop={goToTop}
                 />
+                {pagesCounter > 100 && !goToPage && <button onClick={()=> setgoToPage(!goToPage)} className='rounded-lg px-1  bg-blue-500 text-white'>go to page...</button>}
+            { 
+                
+                goToPage && pagesCounter > 100 && 
+                <div className='flex gap-2'>
+                    {/* from-to buttons */}
+                    <button className='rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
+                        setfromOne(prev=>!prev);
+                        setfromHundred(false);
+                        setfromTwoHundred(false)
+                    }}>1...100</button>
+                    {pagesCounter > 100 && <button className='rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
+                        setfromHundred(prev=>!prev);
+                        setfromOne(false);
+                    }}>100...200</button>}
+                    {pagesCounter > 200 &&<button className='rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
+                        setfromTwoHundred(prev=>!prev)
+                        setfromOne(false);
+                        setfromHundred(false)
+                    }}>200...</button>}
+
+                </div>
+                
             }
 
-            {
-                toIndex > jobs.length-1 ? <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' disabled>next</button> :
+            {pagesCounter < 100 && <button onClick={()=> setgoToPage(!goToPage)} className='rounded-lg px-1  bg-blue-500 text-white'>go to page...</button>}
+
                 <NextButton
                 setPageNum={setPageNum}
                 fromIndex={fromIndex} 
@@ -42,12 +64,13 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
                 pageNumElement={pageNumElement}
                 numOfResults={numOfResults}
                 goToTop={goToTop}
-                />    
-            }
+                jobs={jobs}
+                />
+            </div>
 
             {
                 // render pages buttons
-                pagesCounter <= 100 && 
+                goToPage && pagesCounter < 100 &&
                 chunkedPages.map((chunk, index) => 
                 <Pages  
                 key={index} 
@@ -58,28 +81,6 @@ function Pagination({numOfResults, jobs, fromIndex, setPageNum, setfromIndex, se
                 numOfResults={numOfResults}
                 goToTop={goToTop}
                 /> )
-            }
-
-            </div>
-         
-            { 
-                //from-to buttons
-                pagesCounter > 100 && <div className='grid grid-cols-3'>
-                    <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
-                        setfromOne(prev=>!prev);
-                        setfromHundred(false);
-                        setfromTwoHundred(false)
-                    }}>1...100</button>
-                    {pagesCounter > 100 && <button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
-                        setfromHundred(prev=>!prev);
-                        setfromOne(false);
-                    }}>100...200</button>}
-                    {pagesCounter > 200 &&<button className='ml-2 rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
-                        setfromTwoHundred(prev=>!prev)
-                        setfromOne(false);
-                        setfromHundred(false)
-                    }}>200...</button>}
-                </div>
             }
 
             <hr />

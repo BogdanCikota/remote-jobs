@@ -1,8 +1,8 @@
 import React from 'react'
 
-function Filters({numOfResults, setfromIndex, settoIndex, setPageNum, categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading}) {
+function Filters({goToPage, setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNum, categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading}) {
     const resetPage = () => {
-        setfromIndex(0); settoIndex(numOfResults); setPageNum(1);
+        setfromIndex(0); settoIndex(numOfResults); setPageNum(1); setgoToPage(!goToPage);
     };
     return (
         <div className='filters grid gap-3'>

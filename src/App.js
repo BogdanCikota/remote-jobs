@@ -26,6 +26,7 @@ function App() {
     const [chunkedPages, setChunkedPages] = useState([]);
     const [pageNum, setPageNum] = useState(1);
     const [goToPage, setgoToPage] = useState(false);
+    const [hasData, setHasData] = useState(true);
     
 
     const getCategories = async() => {
@@ -36,6 +37,7 @@ function App() {
 
         } catch (error) {
             console.error(error);
+            setHasData(false);
         }
     };
 
@@ -91,7 +93,7 @@ function App() {
                 />
                 
                 {isLoading
-                    ? <Loading/>:
+                    ? <Loading hasData={hasData} />:
 
                         <Switch>
                             <Route exact path="/">

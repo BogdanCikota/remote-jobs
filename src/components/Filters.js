@@ -9,6 +9,21 @@ function Filters({setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNu
         setfromIndex(0); settoIndex(numOfResults); setPageNum(1); setgoToPage(false);
     };
 
+    const resetFilters = () => {
+        //api state
+        setLimit('all');
+        setCategory(''); 
+        setSearch('');
+        //local state
+        setselectedCategory('Choose a job category');
+        setInputSearch('');
+        setInputLimit('');
+        //dom
+        document.querySelector('select').selectedIndex = 0;
+        document.querySelector('#search').value = '';
+        document.querySelector('#limit').value = '';
+    };
+
     
     return (
         <form className='filters grid gap-3 mb-3' onSubmit={e => {
@@ -42,8 +57,10 @@ function Filters({setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNu
                 }} />
             </div>
 
-            <button className='m-auto rounded-lg px-5  bg-blue-600 text-white' type="submit">Go!</button>
-           
+            <div className='flex justify-evenly'>
+                <button className=' rounded-lg px-5  bg-blue-600 text-white' type="submit">Go!</button>
+                <button className=' rounded-lg px-5  bg-blue-600 text-white' onClick={resetFilters}>Reset</button>
+            </div>
         </form>
     )
 }

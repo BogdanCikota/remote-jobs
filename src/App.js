@@ -88,7 +88,6 @@ function App() {
                 settoIndex={settoIndex}
                 setPageNum={setPageNum}
                 numOfResults={numOfResults}
-                goToPage={goToPage}
                 setgoToPage={setgoToPage}
                 />
                 

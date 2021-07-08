@@ -15,7 +15,7 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
     }
 
     return (
-        <div >
+        <div className='grid gap-2 m-auto my-4'>
 
             <div className='flex gap-3 justify-center mb-1.5'>
                 <PrevButton 
@@ -28,22 +28,25 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 numOfResults={numOfResults}
                 goToTop={goToTop}
                 />
-                {pagesCounter > 100 && !goToPage && <button onClick={()=> setgoToPage(!goToPage)} className='rounded-lg px-1  bg-blue-500 text-white'>go to page...</button>}
+                {pagesCounter > 100 && !goToPage && <button onClick={()=> setgoToPage(!goToPage)} className='rounded-lg px-1  bg-blue-500 text-white'>Go to page...</button>}
             { 
                 
                 goToPage && pagesCounter > 100 && 
-                <div className='flex gap-2'>
+                <div className='flex gap-3'>
                     {/* from-to buttons */}
-                    <button className='rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
+                    <button className={`${fromOne && 'bg-blue-600'}  rounded-lg px-1  bg-blue-500 text-white`} onClick={()=>{
                         setfromOne(prev=>!prev);
                         setfromHundred(false);
                         setfromTwoHundred(false)
                     }}>1...100</button>
-                    {pagesCounter > 100 && <button className='rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
+                    {pagesCounter > 100 &&
+                     <button className={`${fromHundred && 'bg-blue-600'}  rounded-lg px-1  bg-blue-500 text-white`} onClick={()=>{
                         setfromHundred(prev=>!prev);
                         setfromOne(false);
+                        setfromTwoHundred(false)
                     }}>100...200</button>}
-                    {pagesCounter > 200 &&<button className='rounded-lg px-1  bg-blue-500 text-white' onClick={()=>{
+                    {pagesCounter > 200
+                     &&<button className={`${fromTwoHundred && 'bg-blue-600'}  rounded-lg px-1  bg-blue-500 text-white`} onClick={()=>{
                         setfromTwoHundred(prev=>!prev)
                         setfromOne(false);
                         setfromHundred(false)
@@ -53,7 +56,17 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 
             }
 
-            {pagesCounter < 100 && <button onClick={()=> setgoToPage(!goToPage)} className='rounded-lg px-1  bg-blue-500 text-white'>go to page...</button>}
+            {
+               chunkedPages.length > 0 &&  pagesCounter < 100 && 
+                <Pages
+                chunk={chunkedPages[0]}
+                setPageNum={setPageNum} 
+                setfromIndex={setfromIndex} 
+                settoIndex={settoIndex}
+                numOfResults={numOfResults}
+                goToTop={goToTop}
+                /> 
+            }
 
                 <NextButton
                 setPageNum={setPageNum}
@@ -68,22 +81,6 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 />
             </div>
 
-            {
-                // render pages buttons
-                goToPage && pagesCounter < 100 &&
-                chunkedPages.map((chunk, index) => 
-                <Pages  
-                key={index} 
-                chunk={chunk} 
-                setPageNum={setPageNum} 
-                setfromIndex={setfromIndex} 
-                settoIndex={settoIndex}
-                numOfResults={numOfResults}
-                goToTop={goToTop}
-                /> )
-            }
-
-            <hr />
 
             {
                 // render pages buttons when clicked from-to button

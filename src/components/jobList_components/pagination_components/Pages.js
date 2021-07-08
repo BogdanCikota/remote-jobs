@@ -1,23 +1,19 @@
 
 function Pages({goToTop, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
     return (
-        <div className='p-2 grid grid-cols-7 gap-2' >
-            {   
-                chunk.map((page, index) => {
-                return <button className='rounded-lg px-1  bg-blue-400 text-white' key={index} onClick={()=>{
-                        
-                        setPageNum(page+1);
-
-                        setfromIndex(page*numOfResults);
-
-                        settoIndex(page*numOfResults+numOfResults);
-                        goToTop();
-                    }}>
-                        {page+1}
-                    </button>
-                } )
+        <select className='block m-auto border rounded-md' onChange={(e)=>{
+            let num = e.target.value;
+            setPageNum(+num + +1);
+            setfromIndex(num * numOfResults);
+            settoIndex(num * numOfResults+numOfResults);
+            e.target.selectedIndex = 0;
+            goToTop();
+        }}>
+            <option>Go to page...</option>
+            {
+                chunk.map((page, index) => <option key={index} value={page}>{page+1}</option> )
             }
-        </div>
+        </select>
     )
 }
 

@@ -74,6 +74,7 @@ function App() {
         <HashRouter basemname='/'>
             <div className="max-w-sm m-auto">
                 <Header 
+                jobs={jobs}
                 openFilters={openFilters} 
                 setOpenFilters={setOpenFilters}
                 setLimit={setLimit} 

@@ -13,7 +13,7 @@ function JobList({goToPage, setgoToPage, pages, jobs, pagesCounter, fromIndex, s
     }, [pages, setChunkedPages]);
 
     return (
-        <div className='grid gap-2'>
+        <div className='grid gap-2 mb-2'>
             <div className='text-center bg-blue-500 p-1 text-white'>Found <span>{jobs.length} results</span></div>
             <h2 className='font-bold text-center p-1 pl-3 rounded-full  px-3 bg-gray-100 inline-block text-blue-900' >Page <span className='pageNum'>{pageNum}</span> </h2>                    
             <div>
@@ -21,7 +21,8 @@ function JobList({goToPage, setgoToPage, pages, jobs, pagesCounter, fromIndex, s
                     return index >= fromIndex && index < toIndex && <Job key={index} index={index} job={job}/>
                 })}
             </div>
-            <hr/>
+
+            <h2 className='font-bold text-center p-1 pl-3 rounded-full  px-3 bg-gray-100 inline-block text-blue-900' >Page <span className='pageNum'>{pageNum}</span> </h2>
             
             {
                 jobs.length > numOfResults  && 

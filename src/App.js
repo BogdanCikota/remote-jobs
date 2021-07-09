@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
 import JobList from "./components/JobList";
-import Filters from "./components/Filters";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { HashRouter, Route, Switch } from "react-router-dom";
@@ -74,9 +73,9 @@ function App() {
 
         <HashRouter basemname='/'>
             <div className="max-w-sm m-auto">
-                <Header openFilters={openFilters} setOpenFilters={setOpenFilters} />
-                
-                <Filters 
+                <Header 
+                openFilters={openFilters} 
+                setOpenFilters={setOpenFilters}
                 setLimit={setLimit} 
                 setCategory={setCategory} 
                 setSearch={setSearch}
@@ -90,6 +89,8 @@ function App() {
                 numOfResults={numOfResults}
                 setgoToPage={setgoToPage}
                 />
+                
+                
                 
                 {isLoading
                     ? <Loading hasData={hasData} />:

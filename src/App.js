@@ -72,7 +72,7 @@ function App() {
     return (
 
         <HashRouter basemname='/'>
-            <div className="max-w-sm m-auto">
+            <div className="md:mx-40 xl:mx-0">
                 <Header 
                 openFilters={openFilters} 
                 setOpenFilters={setOpenFilters}

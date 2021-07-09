@@ -26,7 +26,7 @@ function Filters({setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNu
 
     
     return (
-        <form className='col-span-full filters grid gap-3 bg-white py-3' onSubmit={e => {
+        <form className='col-span-full filters grid gap-3 bg-white py-3 xl:bg-gray-50  xl:p-5 xl:rounded-lg xl:mx-3 xl:col-start-2 xl:col-end-7 xl:gap-6' onSubmit={e => {
                     e.preventDefault();
                     setCategory(selectedCategory);
                     setSearch(inputSearch);
@@ -57,9 +57,9 @@ function Filters({setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNu
                 }} />
             </div>
 
-            <div className='flex justify-evenly'>
-                <button className=' rounded-lg px-5  bg-blue-500 text-white' type="submit">Go!</button>
-                <button className=' rounded-lg px-5  bg-blue-500 text-white' onClick={resetFilters}>Reset</button>
+            <div className='flex justify-evenly xl:justify-center xl:gap-14'>
+                <button className=' rounded-lg px-5  bg-blue-500 text-white xl:p-2 xl:px-5 xl:rounded-full' type="submit">Go!</button>
+                <button className=' rounded-lg px-5  bg-blue-500 text-white xl:p-2 xl:px-5 xl:rounded-full' onClick={resetFilters}>Reset</button>
             </div>
         </form>
     )

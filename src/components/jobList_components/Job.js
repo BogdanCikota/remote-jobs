@@ -9,7 +9,7 @@ function Job({job, index}) {
 
     return (
         <div className={`${index%2 !== 0 ? `bg-gray-100`: `bg-gray-50`} p-3`}>
-
+            <img src={`https://remotive.io/job/${job.id}/logo`} alt={`logo ${job.company_name}`} />
             <h3 className='text-blue-900 font-semibold'>Company: <span className='font-bold' >{job.company_name}</span> </h3>
             <p className='text-blue-900 font-semibold'>Category: <span className='font-normal'>{job.category}</span> </p>
             <div className='text-blue-900 font-semibold'>Required location: {job.candidate_required_location === '' ? <span>/</span> : <span className='font-normal'>{job.candidate_required_location}</span> } </div>

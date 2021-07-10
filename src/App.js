@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import JobDescription from "./components/JobDescription";
 import Loading from "./components/Loading";
+import ZeroResults from "./components/ZeroResults";
 
 
 function App() {
@@ -92,9 +93,9 @@ function App() {
                 
                 
                 
-                {isLoading
-                    ? <Loading hasData={hasData} />:
-
+                {isLoading ? <Loading hasData={hasData} />:
+                    
+                    jobs.length === 0 ? <ZeroResults/> :
                         <Switch>
                             <Route exact path="/">
                                 <JobList 
@@ -121,7 +122,7 @@ function App() {
                     }
 
                     
-                    <Footer isLoading={isLoading} />
+                    <Footer isLoading={isLoading} jobs={jobs} />
             </div>
         </HashRouter>
    

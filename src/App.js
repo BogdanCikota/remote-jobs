@@ -121,7 +121,7 @@ function App() {
                     }
 
                     
-                    <Footer />
+                    <Footer isLoading={isLoading} />
             </div>
         </HashRouter>
    

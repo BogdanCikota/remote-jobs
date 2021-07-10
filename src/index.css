@@ -49,9 +49,7 @@
 }
 */
 
-/* .job-description {
-	
-} */
+
 
 .job-description > *, .job-description span, .job-description li, .job-description strong {
     color: rgba(30, 58, 138, 1) !important;
@@ -90,6 +88,25 @@
 	display: none;
 }
 
+
+@media only screen and (min-width: 1280px){
+	.job-description {
+		padding: 2rem;
+	}
+
+	.job-description > *, .job-description span, .job-description li, .job-description strong {
+		font-size: 17px !important;
+	} 
+}
+
+
 .filters {
 	display: none;
 }
+
+footer p:first-of-type {
+	max-width: 65rem;
+	margin: 0 auto;
+}
+
+

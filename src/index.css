@@ -109,4 +109,6 @@ footer p:first-of-type {
 	margin: 0 auto;
 }
 
-
+.job:last-of-type {
+	border: none;
+}

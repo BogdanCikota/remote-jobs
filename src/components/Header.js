@@ -7,7 +7,7 @@ function Header({ openFilters, setOpenFilters, setgoToPage, numOfResults, setfro
             <h1 className='m-3 mb-2  text-white text-2xl cursor-pointer' onClick={()=> window.location.reload()}>Remote Jobs</h1>
             <button className={`${openFilters ? `xl:h-11` : `xl:h-auto`} col-start-2  m-3 mb-2 block  bg-blue-500 text-white rounded-full  px-3 ml-auto h-6 mt-5 xl:p-1 xl:mt-0 xl:relative top-2 xl:px-3  xl:col-start-7`} onClick={()=> {
                 setOpenFilters(openFilters => !openFilters);
-                }}> {openFilters ? <span>Hide</span>: <span>Show</span> } filters</button>
+                }}> {openFilters && <span>x</span> } Filters </button>
             
             <div className={`${openFilters ? `col-span-full xl:col-start-3 xl:col-end-6 xl:row-span-full` : `hidden`}  `}>
                 <Filters 

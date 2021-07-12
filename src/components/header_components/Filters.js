@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
 
-function Filters({setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNum, categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading}) {
+function Filters({setOpenFilters, setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNum, categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading}) {
 
     const [selectedCategory, setselectedCategory] = useState('');
     const [inputLimit, setInputLimit] = useState(0);
     
     const resetPage = () => {
-        setfromIndex(0); settoIndex(numOfResults); setPageNum(1); setgoToPage(false);
+        setfromIndex(0);
+        settoIndex(numOfResults);
+        setPageNum(1);
+        setgoToPage(false);
+        setOpenFilters(false);
     };
 
     const resetFilters = () => {
@@ -18,6 +22,7 @@ function Filters({setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNu
         setselectedCategory('Choose a job category');
         setInputSearch('');
         setInputLimit('');
+        setOpenFilters(false);
         //dom
         document.querySelector('select').selectedIndex = 0;
         document.querySelector('#search').value = '';
@@ -26,7 +31,7 @@ function Filters({setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNu
 
     
     return (
-        <form className='col-span-full filters grid gap-3 bg-white py-3 xl:bg-gray-50  xl:p-5 xl:rounded-lg xl:mx-3 xl:col-start-2 xl:col-end-7 xl:gap-6' onSubmit={e => {
+        <form className='grid gap-3 bg-white py-3 xl:bg-gray-50  xl:p-5 xl:rounded-lg xl:mx-3 xl:col-start-2 xl:col-end-7 xl:gap-6' onSubmit={e => {
                     e.preventDefault();
                     setCategory(selectedCategory);
                     setSearch(inputSearch);

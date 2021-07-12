@@ -113,6 +113,7 @@ function App() {
                                 numOfResults={numOfResults}
                                 goToPage={goToPage}
                                 setgoToPage={setgoToPage}
+                                openFilters={openFilters}
                                 /> 
                             </Route>
 

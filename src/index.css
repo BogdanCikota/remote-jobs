@@ -44,10 +44,7 @@
 }
 
 
-/* .job-description {
-	padding: 1rem;
-}
-*/
+
 
 
 
@@ -97,6 +94,17 @@
 	.job-description > *, .job-description span, .job-description li, .job-description strong {
 		font-size: 17px !important;
 	} 
+}
+
+@media only screen and (max-width: 640px){
+	.job-description {
+		overflow: hidden !important;
+	}
+
+	.job-description > *, .job-description span, .job-description li, .job-description strong {
+		width: 95vw !important;
+	} 
+	
 }
 
 

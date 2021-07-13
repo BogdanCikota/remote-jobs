@@ -14,7 +14,7 @@ function JobList({openFilters, goToPage, setgoToPage, pages, jobs, pagesCounter,
 
     return (
         <div className='grid gap-0.5 mb-2 xl:mt-16 xl:m-auto xl:max-w-5xl'>
-            <div className={`${openFilters && `xl:opacity-0`} text-center bg-blue-500 p-1 text-white mb-4 xl:bg-blue-300 xl:rounded-b-full xl:p-1.5`}>Found <span>{jobs.length} results</span></div>
+            <div className={`${openFilters ? `xl:bg-opacity-30 bg-blue-400` : `bg-blue-500`} text-center  p-1 text-white mb-4 xl:bg-blue-300 xl:rounded-b-full xl:p-1.5`}>Found <span>{jobs.length} results</span></div>
             <h2 className='font-bold text-center inline-block text-blue-900 ' >Page <span className='pageNum'>{pageNum}</span> </h2>                    
             <div className='grid '>
                 {jobs.map((job, index) => {

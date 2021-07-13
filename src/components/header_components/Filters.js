@@ -31,7 +31,7 @@ function Filters({setOpenFilters, setgoToPage, numOfResults, setfromIndex, setto
 
     
     return (
-        <form className='grid gap-3 bg-white py-3 xl:p-5 xl:rounded-lg xl:mt-4 xl:mb-1 xl:gap-6' onSubmit={e => {
+        <form className='pb-6 grid gap-3 bg-white xl:p-5 xl:rounded-lg xl:gap-6' onSubmit={e => {
                     e.preventDefault();
                     setCategory(selectedCategory);
                     setSearch(inputSearch);
@@ -62,9 +62,9 @@ function Filters({setOpenFilters, setgoToPage, numOfResults, setfromIndex, setto
                 }} />
             </div>
 
-            <div className='flex justify-evenly xl:justify-center xl:gap-14'>
-                <button className=' rounded-lg px-5  bg-blue-400 text-white xl:p-2 xl:px-5 xl:rounded-full' type="submit">Go!</button>
-                <button className=' rounded-lg px-5  bg-blue-400 text-white xl:p-2 xl:px-5 xl:rounded-full' onClick={resetFilters}>Reset</button>
+            <div className='flex justify-evenly mt-2 xl:justify-center xl:gap-14 xl:mt-0'>
+                <button className=' rounded-lg px-4 py-1  bg-blue-400 text-white' type="submit">Go!</button>
+                <button className=' rounded-lg px-4 py-1  bg-blue-400 text-white' onClick={resetFilters}>Reset</button>
             </div>
         </form>
     )

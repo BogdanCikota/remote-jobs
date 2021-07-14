@@ -16,7 +16,7 @@ function JobDescription() {
         
         <div className='xl:flex gap-2'>
             <div className='w-20 h-20 m-auto xl:border xl:p-3 xl:m-0 xl:w-auto xl:h-auto self-center'>
-                <img src={`https://remotive.io/job/${job.id}/logo`} alt={`logo ${job.company_name}`} className='rounded-full' />
+                <img className='rounded-full xl:rounded-none' src={`https://remotive.io/job/${job.id}/logo`} alt={`logo ${job.company_name}`} />
             </div>
            
             <div className='text-blue-900 font-semibold p-2 xl:grid gap-2'>

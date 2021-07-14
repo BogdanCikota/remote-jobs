@@ -73,7 +73,7 @@ function App() {
     return (
 
         <HashRouter basemname='/'>
-            <div className="md:mx-40 xl:mx-0">
+            <div className="App md:mx-40 xl:mx-0 grid">
                 <Header 
                 openFilters={openFilters} 
                 setOpenFilters={setOpenFilters}
@@ -122,8 +122,7 @@ function App() {
                     
                     }
 
-                    
-                    <Footer isLoading={isLoading} jobs={jobs} />
+                    <Footer isLoading={isLoading} />
             </div>
         </HashRouter>
    

@@ -1,7 +1,7 @@
 
 function NextButton({jobs, goToTop, numOfResults, setPageNum, pageNumElement, fromIndex, setfromIndex, toIndex, settoIndex}) {
     return (
-        <button disabled={toIndex > jobs.length-1 ? true : false} className='font-bold bg-blue-500 px-2 pb-0.5 rounded-full text-xl text-white' onClick={()=>{
+        <button disabled={toIndex > jobs.length-1 ? true : false} className='font-bold bg-blue-500 xl:bg-blue-400 px-2 pb-0.5 rounded-full text-xl text-white' onClick={()=>{
             setPageNum(()=>{
                 let pageNumCurrent = pageNumElement.innerHTML;
                 return +pageNumCurrent + +1

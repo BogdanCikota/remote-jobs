@@ -1,17 +1,16 @@
 
 function Loading({hasData}) {
     return (
-        <div className='grid gap-2 xl:mt-16 xl:m-auto xl:max-w-5xl'>
-            <h2 className='text-center bg-blue-500 p-1 text-white xl:bg-blue-300 xl:rounded-b-full xl:p-1.5'>
+        <div className='loading grid gap-0.5 mb-2 xl:mt-16 xl:m-auto xl:w-2/3'>
+            <div className='bg-blue-500 text-center  p-1 text-white mb-4 xl:bg-blue-300 xl:rounded-b-full xl:p-1.5'>
                 {hasData ? <span>Loading...</span> : <span>No data! Try again later!</span>}
-            </h2>
-            <div className='rounded-full bg-gray-100 h-8' > </div>
+            </div>
             <div>
-                <div className='bg-gray-50 p-3 h-32'></div>
-                <div className='bg-gray-100 p-3 h-32'></div>
-                <div className='bg-gray-50 p-3 h-32'></div>
-                <div className='hidden bg-gray-100 p-3 h-32 xl:block'></div>
-                <div className='hidden bg-gray-50 p-3 h-32 xl:block'></div>
+                <div className='job border-b hover:bg-gray-50 h-24'></div>
+                <div className='job border-b hover:bg-gray-50 h-24'></div>
+                <div className='job border-b hover:bg-gray-50 h-24'></div>
+                <div className='hidden job border-b hover:bg-gray-50 xl:block h-24'></div>
+                <div className='hidden job border-b hover:bg-gray-50 xl:block h-24'></div>
             </div>
         </div>
     )

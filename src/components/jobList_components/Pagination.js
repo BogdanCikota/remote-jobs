@@ -28,25 +28,25 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 numOfResults={numOfResults}
                 goToTop={goToTop}
                 />
-                {pagesCounter > 100 && !goToPage && <button onClick={()=> setgoToPage(!goToPage)} className='rounded-lg px-1  bg-blue-500 text-white'>Go to page...</button>}
+                {pagesCounter > 100 && !goToPage && <button onClick={()=> setgoToPage(!goToPage)} className='rounded-lg px-1  bg-blue-500 xl:bg-blue-400 text-white'>Go to page...</button>}
             { 
                 
                 goToPage && pagesCounter > 100 && 
                 <div className='flex gap-3'>
                     {/* from-to buttons */}
-                    <button className={`${fromOne && 'bg-blue-600'}  rounded-lg px-1  bg-blue-500 text-white`} onClick={()=>{
+                    <button className={`${fromOne ? 'bg-blue-600 xl:bg-blue-500' : 'bg-blue-500 xl:bg-blue-400'}  rounded-lg px-1 text-white`} onClick={()=>{
                         setfromOne(prev=>!prev);
                         setfromHundred(false);
                         setfromTwoHundred(false)
                     }}>1...100</button>
                     {pagesCounter > 100 &&
-                     <button className={`${fromHundred && 'bg-blue-600'}  rounded-lg px-1  bg-blue-500 text-white`} onClick={()=>{
+                     <button className={`${fromHundred ? 'bg-blue-600 xl:bg-blue-500' : 'bg-blue-500 xl:bg-blue-400'}  rounded-lg px-1 bg-blue-500 xl:bg-blue-400 text-white`} onClick={()=>{
                         setfromHundred(prev=>!prev);
                         setfromOne(false);
                         setfromTwoHundred(false)
                     }}>100...200</button>}
                     {pagesCounter > 200
-                     &&<button className={`${fromTwoHundred && 'bg-blue-600'}  rounded-lg px-1  bg-blue-500 text-white`} onClick={()=>{
+                     &&<button className={`${fromTwoHundred ? 'bg-blue-600 xl:bg-blue-500' : 'bg-blue-500 xl:bg-blue-400'}  rounded-lg px-1 bg-blue-500 xl:bg-blue-400 text-white`} onClick={()=>{
                         setfromTwoHundred(prev=>!prev)
                         setfromOne(false);
                         setfromHundred(false)

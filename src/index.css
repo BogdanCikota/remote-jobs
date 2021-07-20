@@ -49,7 +49,7 @@
 
 
 .job-description > *, .job-description span, .job-description li, .job-description strong {
-    color: rgba(30, 58, 138, 1) !important;
+    color: rgba(31, 41, 55) !important;
 	font-size: 15px !important;
 	font-family: Arial, Helvetica, sans-serif !important;
 } 
@@ -81,31 +81,7 @@
     margin-left: 1rem !important;
 }
 
-.job-description br {
-	display: none;
-}
 
-
-@media only screen and (min-width: 1280px){
-	.job-description {
-		padding: 2rem;
-	}
-
-	.job-description > *, .job-description span, .job-description li, .job-description strong {
-		font-size: 17px !important;
-	} 
-}
-
-@media only screen and (max-width: 640px){
-	.job-description {
-		overflow: hidden !important;
-	}
-
-	.job-description > *, .job-description span, .job-description li, .job-description strong {
-		width: 90vw !important;
-	} 
-	
-}
 
 
 .filters {

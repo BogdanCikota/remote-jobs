@@ -1,5 +1,11 @@
+import { useEffect, useState } from "react";
 
-function Pages({goToTop, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
+function Pages({pages, lastChunk, chunkIndex, goToTop, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
+    const [lastNumInChunk, setLastNumInChunk] = useState(0);
+
+    useEffect(() => {
+        setLastNumInChunk(chunk.filter((num, index) => chunk.length-1 === index))
+    }, [chunk])
     return (
         <select className='block m-auto border rounded-md' onChange={(e)=>{
             let num = e.target.value;
@@ -9,9 +15,13 @@ function Pages({goToTop, numOfResults, chunk, setPageNum, setfromIndex, settoInd
             e.target.selectedIndex = 0;
             goToTop();
         }}>
-            <option>Go to page...</option>
             {
-                chunk.map((page, index) => <option key={index} value={page}>{page+1}</option> )
+                pages && pages.length > 100 ?
+                <option>{`${(chunkIndex+1)*100-100+1}-${lastChunk === chunkIndex ? +lastNumInChunk + +1 : (chunkIndex+1)*100}`}</option> :
+                <option>{`1-${+lastNumInChunk + +1}`}</option>
+            }
+            {
+                chunk.map((num, index) => <option key={index} value={num}>{num+1}</option> )
             }
         </select>
     )

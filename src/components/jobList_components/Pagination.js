@@ -6,9 +6,7 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
 
     const pageNumElement = document.querySelector('.pageNum');
 
-    const goToTop = () => {
-        window.scroll(0,0);
-    }
+    
 
     return (
             <div className='m-auto my-4 flex gap-6 justify-center mb-1.5 items-center'>
@@ -20,7 +18,6 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 settoIndex={settoIndex}
                 pageNumElement={pageNumElement}
                 numOfResults={numOfResults}
-                goToTop={goToTop}
                 />
                 {pages && pages.length > 100 && !goToPage && <button onClick={()=> setgoToPage(!goToPage)} className='rounded-lg px-1  bg-blue-500 xl:bg-blue-400 text-white'>Go to page...</button>}
 
@@ -30,7 +27,7 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 <div className='grid gap-3 sm:flex'>
                     {
                         chunkedPages.map((chunk, index) => {
-                            return <Pages key={index} pages={pages} lastChunk={chunkedPages.length-1} chunkIndex={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} numOfResults={numOfResults} goToTop={goToTop}/>
+                            return <Pages key={index} pages={pages} lastChunk={chunkedPages.length-1} chunkIndex={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} numOfResults={numOfResults}/>
                         })
                     }
                 </div>
@@ -44,7 +41,6 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 setfromIndex={setfromIndex} 
                 settoIndex={settoIndex}
                 numOfResults={numOfResults}
-                goToTop={goToTop}
                 /> 
             }
 
@@ -56,7 +52,6 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 settoIndex={settoIndex}
                 pageNumElement={pageNumElement}
                 numOfResults={numOfResults}
-                goToTop={goToTop}
                 jobs={jobs}
                 />
             </div>

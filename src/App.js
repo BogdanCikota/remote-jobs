@@ -96,7 +96,7 @@ function App() {
                 {isLoading ? <Loading hasData={hasData} />:
                     
                     jobs.length === 0 ? <ZeroResults/> :
-                        <Switch>
+                        <Switch onClick={window.scrollTo(0,0)}>
                             <Route exact path="/">
                                 <JobList 
                                 jobs={jobs} 

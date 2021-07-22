@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Pages({pages, lastChunk, chunkIndex, goToTop, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
+function Pages({pages, lastChunk, chunkIndex, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
     const [lastNumInChunk, setLastNumInChunk] = useState(0);
 
     useEffect(() => {
@@ -13,7 +13,6 @@ function Pages({pages, lastChunk, chunkIndex, goToTop, numOfResults, chunk, setP
             setfromIndex(num * numOfResults);
             settoIndex(num * numOfResults+numOfResults);
             e.target.selectedIndex = 0;
-            goToTop();
         }}>
             {
                 pages && pages.length > 100 ?

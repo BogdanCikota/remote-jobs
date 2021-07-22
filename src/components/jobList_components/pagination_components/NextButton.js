@@ -1,5 +1,5 @@
 
-function NextButton({jobs, goToTop, numOfResults, setPageNum, pageNumElement, fromIndex, setfromIndex, toIndex, settoIndex}) {
+function NextButton({jobs, numOfResults, setPageNum, pageNumElement, fromIndex, setfromIndex, toIndex, settoIndex}) {
     return (
         <button disabled={toIndex > jobs.length-1 ? true : false} className='font-bold bg-blue-500 xl:bg-blue-400 px-2 pb-0.5 rounded-full text-xl text-white' onClick={()=>{
             setPageNum(()=>{
@@ -8,7 +8,6 @@ function NextButton({jobs, goToTop, numOfResults, setPageNum, pageNumElement, fr
                 });
             setfromIndex(fromIndex+numOfResults);
             settoIndex(toIndex+numOfResults);
-            goToTop();
         }}>&#62;</button>
     )
 }

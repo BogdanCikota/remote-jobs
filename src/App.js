@@ -21,12 +21,13 @@ function App() {
     const [search, setSearch] = useState('');
     const [openFilters, setOpenFilters] = useState(false);
     const [fromIndex, setfromIndex] =useState(0);
-    const numOfResults = 7;
+    const numOfResults = 10;
     const [toIndex, settoIndex]  = useState(numOfResults);
     const [chunkedPages, setChunkedPages] = useState([]);
     const [pageNum, setPageNum] = useState(1);
     const [goToPage, setgoToPage] = useState(false);
     const [hasData, setHasData] = useState(true);
+    const [jobPositionTop, setJobPositionTop] = useState(0);
     
 
     const getCategories = async() => {
@@ -89,6 +90,7 @@ function App() {
                 setPageNum={setPageNum}
                 numOfResults={numOfResults}
                 setgoToPage={setgoToPage}
+                setJobPositionTop={setJobPositionTop}
                 />
                 
                 
@@ -96,7 +98,9 @@ function App() {
                 {isLoading ? <Loading hasData={hasData} />:
                     
                     jobs.length === 0 ? <ZeroResults/> :
-                        <Switch onClick={window.scrollTo(0,0)}>
+                        <Switch 
+                        onClick={window.scrollTo(0, jobPositionTop)}
+                        >
                             <Route exact path="/">
                                 <JobList 
                                 jobs={jobs} 
@@ -114,6 +118,7 @@ function App() {
                                 goToPage={goToPage}
                                 setgoToPage={setgoToPage}
                                 openFilters={openFilters}
+                                setJobPositionTop={setJobPositionTop}
                                 /> 
                             </Route>
 

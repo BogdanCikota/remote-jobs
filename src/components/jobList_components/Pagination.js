@@ -2,7 +2,7 @@ import Pages from "./pagination_components/Pages";
 import PrevButton from "./pagination_components/PrevButton";
 import NextButton from "./pagination_components/NextButton";
 
-function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPageNum, setfromIndex, settoIndex, toIndex, pages, chunkedPages }) {
+function Pagination({setJobPositionTop, goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPageNum, setfromIndex, settoIndex, toIndex, pages, chunkedPages }) {
 
     const pageNumElement = document.querySelector('.pageNum');
 
@@ -18,8 +18,12 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 settoIndex={settoIndex}
                 pageNumElement={pageNumElement}
                 numOfResults={numOfResults}
+                setJobPositionTop={setJobPositionTop}
                 />
-                {pages && pages.length > 100 && !goToPage && <button onClick={()=> setgoToPage(!goToPage)} className='rounded-lg px-1  bg-blue-500 xl:bg-blue-400 text-white'>Go to page...</button>}
+                {pages && pages.length > 100 && !goToPage && <button onClick={(e)=> {
+                     setgoToPage(!goToPage);
+                     setJobPositionTop(e.target.offsetTop);
+                    }} className='rounded-lg px-1  bg-blue-500 xl:bg-blue-400 text-white'>Go to page...</button>}
 
             { 
                 // generate from/to select
@@ -27,7 +31,18 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 <div className='grid gap-3 sm:flex'>
                     {
                         chunkedPages.map((chunk, index) => {
-                            return <Pages key={index} pages={pages} lastChunk={chunkedPages.length-1} chunkIndex={index} chunk={chunk} setPageNum={setPageNum} setfromIndex={setfromIndex} settoIndex={settoIndex} numOfResults={numOfResults}/>
+                            return <Pages
+                                    key={index}
+                                    pages={pages}
+                                    lastChunk={chunkedPages.length-1}
+                                    chunkIndex={index}
+                                    chunk={chunk}
+                                    setPageNum={setPageNum}
+                                    setfromIndex={setfromIndex}
+                                    settoIndex={settoIndex}
+                                    numOfResults={numOfResults}
+                                    setJobPositionTop={setJobPositionTop}
+                                    />
                         })
                     }
                 </div>
@@ -41,6 +56,7 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 setfromIndex={setfromIndex} 
                 settoIndex={settoIndex}
                 numOfResults={numOfResults}
+                setJobPositionTop={setJobPositionTop}
                 /> 
             }
 
@@ -53,6 +69,7 @@ function Pagination({goToPage, setgoToPage, numOfResults, jobs, fromIndex, setPa
                 pageNumElement={pageNumElement}
                 numOfResults={numOfResults}
                 jobs={jobs}
+                setJobPositionTop={setJobPositionTop}
                 />
             </div>
     )

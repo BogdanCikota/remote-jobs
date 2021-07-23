@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Pages({pages, lastChunk, chunkIndex, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
+function Pages({setJobPositionTop, pages, lastChunk, chunkIndex, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
     const [lastNumInChunk, setLastNumInChunk] = useState(0);
 
     useEffect(() => {
@@ -13,6 +13,7 @@ function Pages({pages, lastChunk, chunkIndex, numOfResults, chunk, setPageNum, s
             setfromIndex(num * numOfResults);
             settoIndex(num * numOfResults+numOfResults);
             e.target.selectedIndex = 0;
+            setJobPositionTop(0);
         }}>
             {
                 pages && pages.length > 100 ?

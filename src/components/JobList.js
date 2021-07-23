@@ -3,7 +3,7 @@ import Job from "./jobList_components/Job";
 import chunk from 'lodash.chunk';
 import Pagination from "./jobList_components/Pagination";
 
-function JobList({openFilters, goToPage, setgoToPage, pages, jobs, fromIndex, setfromIndex, toIndex, settoIndex,
+function JobList({setJobPositionTop, openFilters, goToPage, setgoToPage, pages, jobs, fromIndex, setfromIndex, toIndex, settoIndex,
     chunkedPages, setChunkedPages, pageNum, setPageNum, numOfResults} ) {
 
     useEffect(() => {
@@ -18,7 +18,7 @@ function JobList({openFilters, goToPage, setgoToPage, pages, jobs, fromIndex, se
             
             <div className='jobs-container'>
                 {jobs.map((job, index) => {
-                    return index >= fromIndex && index < toIndex && <Job key={index} index={index} job={job}/>
+                    return index >= fromIndex && index < toIndex && <Job key={index} job={job} setJobPositionTop={setJobPositionTop}/>
                 })}
             </div>
             
@@ -42,6 +42,7 @@ function JobList({openFilters, goToPage, setgoToPage, pages, jobs, fromIndex, se
                 numOfResults={numOfResults}
                 goToPage={goToPage}
                 setgoToPage={setgoToPage}
+                setJobPositionTop={setJobPositionTop}
                 />
             }
             

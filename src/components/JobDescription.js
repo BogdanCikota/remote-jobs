@@ -12,6 +12,7 @@ function JobDescription() {
     jobDate = jobDate.slice(5,16);
 
     useEffect(() => {
+        window.scroll(0,0);
         let jobDescription = document.querySelector('.job-description');
         for (let i = 0; i < jobDescription.children.length; i++) {
             if(jobDescription.children[i].innerHTML === '&nbsp;' || jobDescription.children[i].innerHTML === '' || jobDescription.children[i].innerHTML === '<br><br>' || jobDescription.children[i].innerHTML === '<br>') {

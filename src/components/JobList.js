@@ -12,8 +12,8 @@ function JobList({setJobPositionTop, openFilters, goToPage, setgoToPage, pages, 
     }, [pages, setChunkedPages]);
 
     return (
-        <main className=' grid mb-2 xl:mt-16 xl:m-auto xl:w-2/3 xl:items-start'>
-            <div className={`${openFilters ? `xl:bg-opacity-30 bg-blue-400` : `bg-blue-500`} text-center  p-1 text-white mb-4 xl:bg-blue-300 xl:rounded-b-full xl:p-1.5`}>Found <span>{jobs.length} results</span></div>
+        <main className={` ${!openFilters && `md:mt-16`} grid mb-2 md:mx-auto md:w-2/3 md:items-start`}>
+            <div className={`${openFilters ? `md:bg-opacity-30 bg-blue-400` : `bg-blue-500`} text-center  p-1 text-white mb-4 md:rounded-b-full md:bg-blue-300 xl:p-1.5`}>Found <span>{jobs.length} results</span></div>
             <h2 className={`${jobs.length < numOfResults ?  `hidden`:`inline-block`} font-bold text-center text-blue-900`} >Page <span className='pageNum'>{pageNum}</span> </h2>                    
             
             <div className='jobs-container'>

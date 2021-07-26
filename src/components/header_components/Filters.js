@@ -31,7 +31,7 @@ function Filters({setOpenFilters, setgoToPage, numOfResults, setfromIndex, setto
 
     
     return (
-        <form className='pb-6 grid gap-3 bg-white xl:p-5 xl:rounded-lg xl:gap-6' onSubmit={e => {
+        <form className='pb-6 grid gap-3 bg-white md:p-5 md:rounded-lg md:gap-6' onSubmit={e => {
                     e.preventDefault();
                     setCategory(selectedCategory);
                     setSearch(inputSearch);

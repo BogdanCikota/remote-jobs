@@ -74,7 +74,7 @@ function App() {
     return (
 
         <HashRouter basemname='/'>
-            <div className="App md:mx-40 xl:mx-0 grid">
+            <div className="App grid">
                 <Header 
                 openFilters={openFilters} 
                 setOpenFilters={setOpenFilters}

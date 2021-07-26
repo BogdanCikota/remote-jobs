@@ -88,10 +88,10 @@
 	display: none;
 }
 
-footer p:first-of-type {
+/* footer p:first-of-type {
 	max-width: 65rem;
 	margin: 0 auto;
-}
+} */
 
 .job:last-of-type {
 	border: none;

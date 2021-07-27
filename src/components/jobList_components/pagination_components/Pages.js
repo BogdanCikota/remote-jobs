@@ -17,8 +17,8 @@ function Pages({setJobPositionTop, pages, lastChunk, chunkIndex, numOfResults, c
         }}>
             {
                 pages && pages.length > 100 ?
-                <option>{`${(chunkIndex+1)*100-100+1}-${lastChunk === chunkIndex ? +lastNumInChunk + +1 : (chunkIndex+1)*100}`}</option> :
-                <option>{`1-${+lastNumInChunk + +1}`}</option>
+                <option>{`${(chunkIndex+1)*100-100+1}...${lastChunk === chunkIndex ? +lastNumInChunk + +1 : (chunkIndex+1)*100}`}</option> :
+                <option>{`1...${+lastNumInChunk + +1}`}</option>
             }
             {
                 chunk.map((num, index) => <option key={index} value={num}>{num+1}</option> )

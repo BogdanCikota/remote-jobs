@@ -78,7 +78,7 @@ function Pagination({setJobPositionTop, goToPage, setgoToPage, numOfResults, job
                     onClick={()=>{
                         setPageNum(num+1);
                         setfromIndex(num * numOfResults);
-                        settoIndex(num * numOfResults+numOfResults);
+                        settoIndex(+num * numOfResults + +numOfResults);
                         setJobPositionTop(0);
                     }}
                     >

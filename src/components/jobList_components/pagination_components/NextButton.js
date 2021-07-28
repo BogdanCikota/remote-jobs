@@ -7,8 +7,8 @@ function NextButton({setJobPositionTop, jobs, numOfResults, setPageNum, pageNumE
                 let pageNumCurrent = pageNumElement.innerHTML;
                 return +pageNumCurrent + +1
                 });
-            setfromIndex(fromIndex+numOfResults);
-            settoIndex(toIndex+numOfResults);
+            setfromIndex(+fromIndex + +numOfResults);
+            settoIndex(+toIndex + +numOfResults);
             setJobPositionTop(0);
         }}>&#62;</button>
     )

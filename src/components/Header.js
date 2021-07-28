@@ -1,6 +1,6 @@
 import Filters from "./header_components/Filters";
 
-function Header({setJobPositionTop, openFilters, setOpenFilters, setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNum, categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading }) {
+function Header({setJobPositionTop, openFilters, setOpenFilters, setgoToPage, numOfResults, setNumOfResults, setfromIndex, settoIndex, setPageNum, categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading }) {
 
     return (
         <header className={`${!openFilters ? `pb-3` : `md:pb-4 md:bg-opacity-60`} bg-blue-400 grid grid-cols-3 md:grid-cols-7 md:fixed w-full left-0 top-0 md:px-7  md:gap-3`}>
@@ -25,6 +25,7 @@ function Header({setJobPositionTop, openFilters, setOpenFilters, setgoToPage, nu
                 settoIndex={settoIndex}
                 setPageNum={setPageNum}
                 numOfResults={numOfResults}
+                setNumOfResults={setNumOfResults}
                 setgoToPage={setgoToPage}
                 setOpenFilters={setOpenFilters}
                 />

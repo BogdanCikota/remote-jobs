@@ -11,7 +11,7 @@ function Pages({setJobPositionTop, pages, lastChunk, chunkIndex, numOfResults, c
             let num = e.target.value;
             setPageNum(+num + +1);
             setfromIndex(num * numOfResults);
-            settoIndex(num * numOfResults+numOfResults);
+            settoIndex(+num * numOfResults + +numOfResults);
             e.target.selectedIndex = 0;
             setJobPositionTop(0);
         }}>

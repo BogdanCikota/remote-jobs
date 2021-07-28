@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 
-function Filters({setOpenFilters, setgoToPage, numOfResults, setfromIndex, settoIndex, setPageNum, categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading}) {
+function Filters({setOpenFilters, setgoToPage, setNumOfResults, setfromIndex, settoIndex, setPageNum, categories, setLimit, setCategory, setSearch, inputSearch, setInputSearch, setIsLoading}) {
 
     const [selectedCategory, setselectedCategory] = useState('');
     const [inputLimit, setInputLimit] = useState(0);
+    const [inputNumOfResults, setInputNumOfResults] = useState(10);
     
     const resetPage = () => {
         setfromIndex(0);
-        settoIndex(numOfResults);
+        settoIndex(inputNumOfResults);
         setPageNum(1);
         setgoToPage(false);
         setOpenFilters(false);
@@ -15,6 +16,7 @@ function Filters({setOpenFilters, setgoToPage, numOfResults, setfromIndex, setto
 
     const resetFilters = () => {
         //api state
+        setNumOfResults(10);
         setLimit('all');
         setCategory(''); 
         setSearch('');
@@ -23,16 +25,19 @@ function Filters({setOpenFilters, setgoToPage, numOfResults, setfromIndex, setto
         setInputSearch('');
         setInputLimit('');
         setOpenFilters(false);
+        setInputNumOfResults(10);
         //dom
         document.querySelector('select').selectedIndex = 0;
         document.querySelector('#search').value = '';
         document.querySelector('#limit').value = '';
+        document.querySelector('#numOfResults').value = '';
     };
 
     
     return (
         <form className='pb-6 grid gap-3 bg-white md:p-5 md:rounded-lg md:gap-6' onSubmit={e => {
                     e.preventDefault();
+                    setNumOfResults(inputNumOfResults);
                     setCategory(selectedCategory);
                     setSearch(inputSearch);
                     setLimit(inputLimit);
@@ -56,9 +61,16 @@ function Filters({setOpenFilters, setgoToPage, numOfResults, setfromIndex, setto
             </div>
 
             <div className='border p-2'>
-                <label className='block'  htmlFor="limit">Limit the number of job listing result <span className='text-sm italic'>(will not work with search input, API problem)</span></label>
+                <label className='block'  htmlFor="limit">Limit the number of results <span className='text-sm italic'>(will not work with search input, API problem)</span></label>
                 <input className='border w-20 my-1.5' type="number" id="limit" min="1" onChange={ e => {
                     setInputLimit(e.target.value);
+                }} />
+            </div>
+
+            <div className='border p-2'>
+                <label className='block'  htmlFor="numOfResults">Set number of results per page: </label>
+                <input className='border w-20 my-1.5' type="number" id="numOfResults" min="1" onChange={ e => {
+                    setInputNumOfResults(e.target.value);
                 }} />
             </div>
 

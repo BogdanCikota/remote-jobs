@@ -21,7 +21,7 @@ function App() {
     const [search, setSearch] = useState('');
     const [openFilters, setOpenFilters] = useState(false);
     const [fromIndex, setfromIndex] =useState(0);
-    const numOfResults = 10;
+    const [numOfResults, setNumOfResults] = useState(10);
     const [toIndex, settoIndex]  = useState(numOfResults);
     const [chunkedPages, setChunkedPages] = useState([]);
     const [pageNum, setPageNum] = useState(1);
@@ -67,7 +67,7 @@ function App() {
         };
         getJobs();
         getCategories();
-    }, [limit, category, search]);
+    }, [limit, category, search, numOfResults]);
 
     
 
@@ -89,6 +89,7 @@ function App() {
                 settoIndex={settoIndex}
                 setPageNum={setPageNum}
                 numOfResults={numOfResults}
+                setNumOfResults={setNumOfResults}
                 setgoToPage={setgoToPage}
                 setJobPositionTop={setJobPositionTop}
                 />

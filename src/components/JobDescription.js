@@ -23,7 +23,7 @@ function JobDescription() {
     }, [job])
     
     return (
-       <div className='xl:mt-16 xl:m-auto xl:max-w-5xl xl:p-4 text-gray-800'>
+       <div className='md:mt-16 xl:mt-16 xl:m-auto xl:max-w-5xl xl:p-4 text-gray-800'>
         <Link to='/' className="ml-2 underline font-semibold lg:text-lg"> &#8592; back</Link>
         
         <div className='xl:flex gap-2 px-4 xl:px-0'>

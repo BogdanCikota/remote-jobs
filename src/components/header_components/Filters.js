@@ -61,14 +61,14 @@ function Filters({setOpenFilters, setgoToPage, setNumOfResults, setfromIndex, se
             </div>
 
             <div className='border p-2'>
-                <label className='block'  htmlFor="limit">Limit the number of results <span className='text-sm italic'>(will not work with search input, API problem)</span></label>
+                <label className='block'  htmlFor="limit">Maximum number of results <span className='text-sm italic'>(will not work with search input, API problem)</span></label>
                 <input className='border w-20 my-1.5' type="number" id="limit" min="1" onChange={ e => {
                     setInputLimit(e.target.value);
                 }} />
             </div>
 
             <div className='border p-2'>
-                <label className='block'  htmlFor="numOfResults">Set number of results per page: </label>
+                <label className='block'  htmlFor="numOfResults">Results per page: </label>
                 <input className='border w-20 my-1.5' type="number" id="numOfResults" min="1" onChange={ e => {
                     setInputNumOfResults(e.target.value);
                 }} />

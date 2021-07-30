@@ -36,7 +36,7 @@ function Pagination({setJobPositionTop, goToPage, setgoToPage, numOfResults, job
             { 
                 // generate from/to select
                 goToPage && pages.length > 100 && 
-                <div className='grid gap-3 sm:flex'>
+                <div className='flex gap-3 flex-wrap justify-center'>
                     {
                         chunkedPages.map((chunk, index) => {
                             return <Pages

@@ -13,8 +13,10 @@ function JobList({setJobPositionTop, openFilters, goToPage, setgoToPage, pages, 
 
     return (
         <main className={` ${!openFilters && `md:mt-16`} grid mb-2 md:mx-auto md:w-2/3 items-start`}>
-            <div className={`${openFilters ? `md:bg-opacity-30 bg-blue-400` : `bg-blue-500`} text-center  p-1 text-white mb-4 md:rounded-b-full md:bg-blue-300 xl:p-1.5`}>Found <span>{jobs.length} results</span></div>
-            <h2 className={`${jobs.length < numOfResults ?  `hidden`:`inline-block`} font-bold text-center text-blue-900`} >Page <span className='pageNum'>{pageNum}</span> </h2>                    
+            <div className='text-center'>
+                <div className={`${openFilters ? `md:bg-opacity-30 bg-blue-400` : `bg-blue-500`} p-1 text-white mb-4 md:rounded-b-full md:bg-blue-300 xl:p-1.5`}>Found <span>{jobs.length} results</span></div>
+                <h2 className={`${jobs.length < numOfResults ?  `hidden`:`inline-block`} font-bold text-blue-900`} >Page <span className='pageNum'>{pageNum}</span> </h2>                    
+            </div>
             
             <div className='jobs-container'>
                 {jobs.map((job, index) => {
@@ -23,28 +25,30 @@ function JobList({setJobPositionTop, openFilters, goToPage, setgoToPage, pages, 
             </div>
             
 
-            <h2 className={`${jobs.length < numOfResults ? `hidden`:`inline-block`} font-bold text-center text-blue-900`} >Page <span className='pageNum'>{pageNum}</span> </h2>
-            
-            {
-                jobs.length > numOfResults  && 
+            <div className='text-center self-end'>
+                <h2 className={`${jobs.length < numOfResults ? `hidden`:`inline-block`} font-bold text-center text-blue-900`} >Page <span className='pageNum'>{pageNum}</span> </h2>
                 
-                <Pagination 
-                fromIndex={fromIndex}
-                setfromIndex={setfromIndex}
-                toIndex={toIndex}
-                settoIndex={settoIndex}
-                chunkedPages={chunkedPages}
-                setChunkedPages={setChunkedPages}
-                pageNum={pageNum}
-                setPageNum={setPageNum}
-                jobs={jobs}
-                pages={pages}
-                numOfResults={numOfResults}
-                goToPage={goToPage}
-                setgoToPage={setgoToPage}
-                setJobPositionTop={setJobPositionTop}
-                />
-            }
+                {
+                    jobs.length > numOfResults  && 
+                    
+                    <Pagination 
+                    fromIndex={fromIndex}
+                    setfromIndex={setfromIndex}
+                    toIndex={toIndex}
+                    settoIndex={settoIndex}
+                    chunkedPages={chunkedPages}
+                    setChunkedPages={setChunkedPages}
+                    pageNum={pageNum}
+                    setPageNum={setPageNum}
+                    jobs={jobs}
+                    pages={pages}
+                    numOfResults={numOfResults}
+                    goToPage={goToPage}
+                    setgoToPage={setgoToPage}
+                    setJobPositionTop={setJobPositionTop}
+                    />
+                }
+            </div>
             
         </main>
     )

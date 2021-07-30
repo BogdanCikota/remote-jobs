@@ -7,7 +7,7 @@ function Pages({setJobPositionTop, pages, lastChunk, chunkIndex, numOfResults, c
         setLastNumInChunk(chunk.filter((num, index) => chunk.length-1 === index))
     }, [chunk])
     return (
-        <select className='block m-auto border rounded-md' onChange={(e)=>{
+        <select className=' border rounded-md ' onChange={(e)=>{
             let num = e.target.value;
             setPageNum(+num + +1);
             setfromIndex(num * numOfResults);

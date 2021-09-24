@@ -63,6 +63,7 @@ function App() {
 
             } catch (error) {
                 console.error(error);
+                setHasData(false);
             }
         };
         getJobs();

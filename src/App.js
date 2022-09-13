@@ -3,7 +3,7 @@ import axios from "axios";
 import JobList from "./components/JobList";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { HashRouter, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Routes  } from "react-router-dom";
 import JobDescription from "./components/JobDescription";
 import Loading from "./components/Loading";
 import ZeroResults from "./components/ZeroResults";
@@ -100,10 +100,10 @@ function App() {
                 {isLoading ? <Loading hasData={hasData} />:
                     
                     jobs.length === 0 ? <ZeroResults/> :
-                        <Switch 
+                        <Routes  
                         onClick={window.scrollTo(0, jobPositionTop)}
                         >
-                            <Route exact path="/">
+                            <Route exact path="/" element={
                                 <JobList 
                                 jobs={jobs} 
                                 pages={pages} 
@@ -121,11 +121,12 @@ function App() {
                                 setgoToPage={setgoToPage}
                                 openFilters={openFilters}
                                 setJobPositionTop={setJobPositionTop}
-                                /> 
+                                />
+                            }> 
                             </Route>
 
-                            <Route exact path="/JobDescription" component={JobDescription} />
-                        </Switch>
+                            <Route exact path="/JobDescription" element={<JobDescription />} />
+                        </Routes >
                     
                     }
 

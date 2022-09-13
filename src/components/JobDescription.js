@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
 function JobDescription() {
     const location = useLocation();
-    const history = useHistory();
+    const history = useNavigate();
     const [dateStr, setDateStr] = useState();
     const [jobDate, setJobDate] = useState();
 
@@ -12,7 +12,7 @@ function JobDescription() {
         if(location.state === undefined) {
             history.push('/');
         } else {
-            setDateStr(location.state.job.publication_date);
+            setDateStr(location.state.publication_date);
             let date = new Date(dateStr + "Z");
             setJobDate(date.toUTCString().slice(5,16));
 
@@ -36,22 +36,22 @@ function JobDescription() {
             
             <div className='xl:flex gap-2 px-4 xl:px-0'>
                 <div className='w-20 h-20 m-auto xl:border xl:p-3 xl:m-0 xl:w-auto xl:h-auto self-center'>
-                    <img className='rounded-full xl:rounded-none' src={`https://remotive.io/job/${location.state.job.id}/logo`} alt={`logo ${location.state.job.company_name}`} />
+                    <img className='rounded-full xl:rounded-none' src={`https://remotive.io/job/${location.state.id}/logo`} alt={`logo ${location.state.company_name}`} />
                 </div>
             
                 <div className='font-semibold p-2 xl:grid gap-2'>
-                    <h3><span className='font-bold' >{location.state.job.company_name}</span> </h3>
-                    <h2>Job title: {location.state.job.title}</h2>
-                    <p>Category:  <span className='font-normal'>{location.state.job.category}</span> </p>
+                    <h3><span className='font-bold' >{location.state.company_name}</span> </h3>
+                    <h2>Job title: {location.state.title}</h2>
+                    <p>Category:  <span className='font-normal'>{location.state.category}</span> </p>
                     <div>
-                        <div className='inline'>{location.state.job.candidate_required_location === '' ? <span>/</span> : <span className='font-normal'>{location.state.job.candidate_required_location}</span> } </div> /
-                        <div className='inline'> {location.state.job.job_type ? <span className='font-normal'>{location.state.job.job_type}</span> : <span>/</span> } </div>
+                        <div className='inline'>{location.state.candidate_required_location === '' ? <span>/</span> : <span className='font-normal'>{location.state.candidate_required_location}</span> } </div> /
+                        <div className='inline'> {location.state_type ? <span className='font-normal'>{location.state_type}</span> : <span>/</span> } </div>
                     </div>
                     <div>Published: <span className='font-normal'>{jobDate}</span> </div>
                 </div>
             </div>
 
-            <div className='border job-description py-3 px-5 w-screen overflow-scroll sm:w-full sm:overflow-visible grid gap-4 leading-relaxed' dangerouslySetInnerHTML={{ __html: location.state.job.description }}></div>
+            <div className='border job-description py-3 px-5 w-screen overflow-scroll sm:w-full sm:overflow-visible grid gap-4 leading-relaxed' dangerouslySetInnerHTML={{ __html: location.state.description }}></div>
             <Link to='/' className="ml-2 underline font-semibold lg:text-lg"> &#8592; back</Link>
         </div>
         }

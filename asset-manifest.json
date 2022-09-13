@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/job-listing-app/static/css/main.c63c33e4.chunk.css",
-    "main.js": "/job-listing-app/static/js/main.c56e6f1a.chunk.js",
-    "main.js.map": "/job-listing-app/static/js/main.c56e6f1a.chunk.js.map",
-    "runtime-main.js": "/job-listing-app/static/js/runtime-main.1974bf2e.js",
-    "runtime-main.js.map": "/job-listing-app/static/js/runtime-main.1974bf2e.js.map",
-    "static/js/2.d479df66.chunk.js": "/job-listing-app/static/js/2.d479df66.chunk.js",
-    "static/js/2.d479df66.chunk.js.map": "/job-listing-app/static/js/2.d479df66.chunk.js.map",
-    "index.html": "/job-listing-app/index.html",
-    "static/css/main.c63c33e4.chunk.css.map": "/job-listing-app/static/css/main.c63c33e4.chunk.css.map",
-    "static/js/2.d479df66.chunk.js.LICENSE.txt": "/job-listing-app/static/js/2.d479df66.chunk.js.LICENSE.txt"
+    "main.css": "/remote-jobs/static/css/main.c63c33e4.chunk.css",
+    "main.js": "/remote-jobs/static/js/main.e9619ff0.chunk.js",
+    "main.js.map": "/remote-jobs/static/js/main.e9619ff0.chunk.js.map",
+    "runtime-main.js": "/remote-jobs/static/js/runtime-main.f2393a23.js",
+    "runtime-main.js.map": "/remote-jobs/static/js/runtime-main.f2393a23.js.map",
+    "static/js/2.62039ae0.chunk.js": "/remote-jobs/static/js/2.62039ae0.chunk.js",
+    "static/js/2.62039ae0.chunk.js.map": "/remote-jobs/static/js/2.62039ae0.chunk.js.map",
+    "index.html": "/remote-jobs/index.html",
+    "static/css/main.c63c33e4.chunk.css.map": "/remote-jobs/static/css/main.c63c33e4.chunk.css.map",
+    "static/js/2.62039ae0.chunk.js.LICENSE.txt": "/remote-jobs/static/js/2.62039ae0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.1974bf2e.js",
-    "static/js/2.d479df66.chunk.js",
+    "static/js/runtime-main.f2393a23.js",
+    "static/js/2.62039ae0.chunk.js",
     "static/css/main.c63c33e4.chunk.css",
-    "static/js/main.c56e6f1a.chunk.js"
+    "static/js/main.e9619ff0.chunk.js"
   ]
 }

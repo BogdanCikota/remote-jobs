@@ -99,6 +99,18 @@
 
 @media (min-width: 768px) {
 	.App {
+		max-width: 1920px;
+		margin: 0 auto;
 		grid-template-rows: 1fr auto;
+	}
+}
+
+@media (min-width: 1920px) {
+	header {
+		width: 1920px !important;
+		top: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
 	}
 }

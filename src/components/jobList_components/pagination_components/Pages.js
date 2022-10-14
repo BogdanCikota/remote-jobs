@@ -1,19 +1,28 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useDispatch } from 'react-redux';
+import { setfromIndex, setJobPositionTop, settoIndex, setPageNum } from '../../../redux/features/globalSlice';
 
-function Pages({setJobPositionTop, pages, lastChunk, chunkIndex, numOfResults, chunk, setPageNum, setfromIndex, settoIndex}) {
+function Pages({lastChunk, chunkIndex, chunk}) {
     const [lastNumInChunk, setLastNumInChunk] = useState(0);
+    const globalState = useSelector(store => store['global']);
+    const {numOfResults, pages} = globalState;
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        setLastNumInChunk(chunk.filter((num, index) => chunk.length-1 === index))
+        setLastNumInChunk(chunk.filter((num, index) => {
+            console.log('num from setLastNumInChunk: ', num);
+            return chunk.length-1 === index
+        }))
     }, [chunk])
     return (
         <select className=' border rounded-md ' onChange={(e)=>{
             let num = e.target.value;
-            setPageNum(+num + +1);
-            setfromIndex(num * numOfResults);
-            settoIndex(+num * numOfResults + +numOfResults);
+            dispatch(setPageNum(+num + +1));
+            dispatch(setfromIndex(num * numOfResults));
+            dispatch(settoIndex(+num * numOfResults + +numOfResults));
             e.target.selectedIndex = 0;
-            setJobPositionTop(0);
+            dispatch(setJobPositionTop(0));
         }}>
             {
                 pages && pages.length > 100 ?

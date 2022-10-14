@@ -17,7 +17,7 @@ function App() {
   const jobsState = useSelector((store) => store["jobs"]);
   const globalState = useSelector((store) => store["global"]);
 
-  const { loading: isLoading, jobs } = jobsState;
+  const { loading: isLoading = false, jobs = [] } = jobsState;
   const { category, search, limit, jobPositionTop } = globalState;
 
   useEffect(() => {

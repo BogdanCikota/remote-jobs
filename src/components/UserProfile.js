@@ -21,7 +21,7 @@ function UserProfile() {
       </Link>
       
       <div className="jobs-container">
-        {user &&
+        {user && user.likedJobs.length > 0 ? 
           [...user.likedJobs].reverse().map((likedJob) =>
             allJobs.map((job, index) => {
               
@@ -31,7 +31,9 @@ function UserProfile() {
                 )
               );
             })
-          )}
+          ) : <p className="font-serif italic text-center md:text-lg">Your job list is empty.</p>
+        
+        }
       </div>
       
       

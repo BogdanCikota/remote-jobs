@@ -143,10 +143,6 @@
 	background-color: rgb(231, 2, 2);
   }
 
-.dropdown:hover .dropdown-content {
-	display: block;
-  }
-
   @media (max-width: 360px) {
 	.nav {
 		display: grid;

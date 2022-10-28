@@ -8,8 +8,8 @@ const initialState = {
   errorMessage: null,
   hasData: true,
   categories: [],
+  allJobs: [],
 };
-
 
 export const getCategories = createAsyncThunk(
   "jobs/getCategories",
@@ -26,11 +26,11 @@ export const getJobs = createAsyncThunk(
   async ({ limit, category, search }, thunkAPI) => {
     // console.log({ limit, category, search });
     const globalState = thunkAPI.getState().global;
-    const {numOfResults} = globalState;
+    const { numOfResults } = globalState;
 
     let dataUrl = `https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`;
     let response = await axios.get(dataUrl);
-    // console.log(response.data);
+    //console.log("jobs: ", response.data.jobs);
 
     let pagesArr = [];
 
@@ -41,6 +41,20 @@ export const getJobs = createAsyncThunk(
     // setpagesCounter(pagesArr.length);
     thunkAPI.dispatch(setpagesCounter(pagesArr.length));
     thunkAPI.dispatch(setPages(pagesArr));
+
+    return response.data;
+  }
+);
+
+export const getAllJobs = createAsyncThunk(
+  "jobs/getAllJobs",
+  async () => {
+    const limit = 0;
+    const category = '';
+    const search = '';
+    let dataUrl = `https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`;
+    let response = await axios.get(dataUrl);
+    // console.log("all jobs: ", response.data.jobs);
 
     return response.data;
   }
@@ -72,6 +86,13 @@ const jobsSlice = createSlice({
         state.categories = [...action.payload.jobs];
       })
       .addCase(getCategories.rejected, (state) => {
+        state.hasData = false;
+        state.errorMessage = "Ops, something went wrong!";
+      })
+      .addCase(getAllJobs.fulfilled, (state, action) => {
+        state.allJobs = [...action.payload.jobs];
+      })
+      .addCase(getAllJobs.rejected, (state) => {
         state.hasData = false;
         state.errorMessage = "Ops, something went wrong!";
       });

@@ -61,7 +61,7 @@ export const globalSlice = createSlice({
     },
     setPageNum: (state, action) => {
       state.pageNum = action.payload;
-    },
+    }
   },
 });
 

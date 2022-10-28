@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/remote-jobs/static/css/main.e3cef207.chunk.css",
+    "main.css": "/remote-jobs/static/css/main.aad21497.chunk.css",
     "main.js": "/remote-jobs/static/js/main.7a34f7f8.chunk.js",
     "main.js.map": "/remote-jobs/static/js/main.7a34f7f8.chunk.js.map",
     "runtime-main.js": "/remote-jobs/static/js/runtime-main.4ed7d92c.js",
@@ -8,7 +8,7 @@
     "static/js/2.e5db9e55.chunk.js": "/remote-jobs/static/js/2.e5db9e55.chunk.js",
     "static/js/2.e5db9e55.chunk.js.map": "/remote-jobs/static/js/2.e5db9e55.chunk.js.map",
     "index.html": "/remote-jobs/index.html",
-    "static/css/main.e3cef207.chunk.css.map": "/remote-jobs/static/css/main.e3cef207.chunk.css.map",
+    "static/css/main.aad21497.chunk.css.map": "/remote-jobs/static/css/main.aad21497.chunk.css.map",
     "static/js/2.e5db9e55.chunk.js.LICENSE.txt": "/remote-jobs/static/js/2.e5db9e55.chunk.js.LICENSE.txt",
     "static/media/heart-red.e704ede0.svg": "/remote-jobs/static/media/heart-red.e704ede0.svg",
     "static/media/heart-white.bc05c968.svg": "/remote-jobs/static/media/heart-white.bc05c968.svg"
@@ -16,7 +16,7 @@
   "entrypoints": [
     "static/js/runtime-main.4ed7d92c.js",
     "static/js/2.e5db9e55.chunk.js",
-    "static/css/main.e3cef207.chunk.css",
+    "static/css/main.aad21497.chunk.css",
     "static/js/main.7a34f7f8.chunk.js"
   ]
 }

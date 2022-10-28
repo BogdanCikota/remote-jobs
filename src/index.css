@@ -114,3 +114,45 @@
 		margin: auto;
 	}
 }
+
+.dropdown {
+	display: inline-block;
+	position: relative;
+}
+
+  .dropdown-content li {
+	padding: 0.5rem;
+	text-align: center;
+  }
+
+  .dropdown-content li:first-of-type {
+	border-bottom: 1px solid white;
+	background-color: #3b82f6
+  }
+
+
+  .dropdown-content li:last-of-type {
+	background-color: red;
+  }
+
+  .dropdown-content li:hover:first-of-type {
+	background-color: #2f6cf0
+  }
+
+  .dropdown-content li:hover:last-of-type {
+	background-color: rgb(231, 2, 2);
+  }
+
+.dropdown:hover .dropdown-content {
+	display: block;
+  }
+
+  @media (max-width: 360px) {
+	.nav {
+		display: grid;
+	}
+
+	.nav ul {
+		padding-top: 1rem;
+	}
+}

@@ -11,7 +11,6 @@ function Pages({lastChunk, chunkIndex, chunk}) {
 
     useEffect(() => {
         setLastNumInChunk(chunk.filter((num, index) => {
-            console.log('num from setLastNumInChunk: ', num);
             return chunk.length-1 === index
         }))
     }, [chunk])

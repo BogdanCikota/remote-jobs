@@ -89,7 +89,7 @@ function Header() {
     >
       <h1
         className="col-span-2 m-3 mb-2  text-white text-2xl cursor-pointer self-start"
-        onClick={() => window.location.replace("/")}
+        onClick={() => window.location.replace("/remote-jobs")}
       >
         Remote Jobs
       </h1>

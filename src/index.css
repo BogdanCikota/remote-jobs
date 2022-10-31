@@ -144,11 +144,13 @@
   }
 
   @media (max-width: 360px) {
-	.nav {
-		display: grid;
-	}
 
 	.nav ul {
 		padding-top: 1rem;
 	}
 }
+
+.rows {
+	grid-template-rows: 2rem 1fr;
+}
+

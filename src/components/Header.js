@@ -84,24 +84,24 @@ function Header() {
   return (
     <header
       className={`${
-        !openFilters ? `pb-3` : `md:pb-4 md:bg-opacity-60 h-screen`
-      } bg-blue-400 grid auto-rows-min grid-cols-4 md:grid-cols-8 md:fixed z-10 w-full left-0 top-0 md:px-7  md:gap-3`}
+        !openFilters ? `sm:pb-3 flex` : ` rows gap-2 md:pb-4 md:bg-opacity-60 h-screen`
+      } bg-blue-400 grid grid-cols-2  justify-between px-1 py-3 sm:pt-0 md:fixed z-10 w-full left-0 top-0 md:px-7  md:gap-3`}
     >
       <h1
-        className="col-span-2 m-3 mb-2  text-white text-2xl cursor-pointer self-start"
+        className="inline sm:m-3 sm:mb-2 text-xl  text-white sm:text-2xl cursor-pointer self-start"
         onClick={() => window.location.replace("/remote-jobs")}
       >
         Remote Jobs
       </h1>
       <div
         className={`${
-          openFilters ? `` : `mt-4`
-        } nav  col-span-2 col-start-3 justify-self-end  md:col-start-7 `}
+          openFilters ? `grid justify-end items-center` : `sm:mt-4`
+        } nav   justify-self-end  `}
       >
         <button
           className={`${
-            openFilters ? `bg-opacity-0 mr-6 md:self-start md:mt-2` : ``
-          } tracking-wide xl:mr-3 cursor-pointer  px-2 py-1   text-white  md:px-3`}
+            openFilters ? `bg-opacity-0 mr-6 self-start md:mt-2 sm:pt-4 md:pt-2` : ``
+          } tracking-wide xl:mr-3 cursor-pointer     text-white  md:px-3`}
           onClick={() => {
             dispatch(setJobPositionTop(0));
             dispatch(setOpenFilters(openFilters));
@@ -131,12 +131,12 @@ function Header() {
             } else {
               setActive(true)
             }
-          }} onMouseLeave={() => setActive(false)} className="dropdown relative  tracking-wide cursor-pointer  text-white mr-3  px-2 py-1  md:px-3` ">
+          }} onMouseLeave={() => setActive(false)} className="dropdown relative  tracking-wide cursor-pointer  text-white sm:mr-3  pl-2 py-1  md:px-3` ">
             My Profile <span className="relative bottom-0.5">&#8964;</span>
-            <ul className={`${isActive ? 'block' : 'hidden'}  dropdown-content absolute max-w-max pt-5 text-white bg-blue-400 text-black`}>
+            <ul className={`${isActive ? 'block' : 'hidden'}  dropdown-content absolute w-24 pt-5 text-white bg-blue-400 text-black`}>
               <li>
                 <Link className="" to={"/user"}>
-                  My job list
+                  Saved jobs
                 </Link>
               </li>
               <li>
@@ -152,9 +152,9 @@ function Header() {
       <div
         className={`${
           openFilters
-            ? `col-span-full md:col-start-2 md:col-end-7  xl:col-start-3 xl:col-end-7 xl:row-start-1`
+            ? ` col-span-full sm:mt-6   `
             : `hidden`
-        } md:mt-5 md:mb-1 `}
+        }  `}
       >
         <Filters />
       </div>

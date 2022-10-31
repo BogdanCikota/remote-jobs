@@ -26,8 +26,8 @@ function JobList() {
       <div className="text-center">
         <div
           className={`${
-            openFilters ? `md:bg-opacity-30 bg-blue-400` : `bg-blue-500`
-          } p-1 text-white mb-4 md:rounded-b-full md:bg-blue-300 xl:p-1.5`}
+            openFilters ? `md:bg-opacity-30 bg-blue-400` : `bg-blue-300`
+          } p-1 text-white mb-4 md:rounded-b-full xl:p-1.5`}
         >
           Found <span>{jobs.length} results</span>
         </div>

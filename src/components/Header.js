@@ -120,7 +120,7 @@ function Header() {
             onClick={signInWithGoogle}
             className={`${
               openFilters ? `hidden` : `inline`
-            } tracking-wide mr-2 lg:mr-3 cursor-pointer   px-2 pb-1 pt-0.5 text-white `}
+            } tracking-wide mr-2 lg:mr-3 cursor-pointer pl-3  px-2 pb-1 pt-0.5 text-white `}
           >
             Login
           </div>
@@ -131,10 +131,10 @@ function Header() {
             } else {
               setActive(true)
             }
-          }} onMouseLeave={() => setActive(false)} className="dropdown relative  tracking-wide cursor-pointer  text-white sm:mr-3  pl-2 py-1  md:px-3` ">
+          }} onMouseLeave={() => setActive(false)} className="dropdown relative  tracking-wide cursor-pointer  text-white sm:mr-3  pl-3 py-1  md:px-3` ">
             My Profile <span className="relative bottom-0.5">&#8964;</span>
-            <ul className={`${isActive ? 'block' : 'hidden'}  dropdown-content absolute w-24 pt-5 text-white bg-blue-400 text-black`}>
-              <li>
+            <ul className={`${isActive ? 'block' : 'hidden'}  dropdown-content absolute left-0 w-28 pt-5 text-white bg-blue-400 text-black`}>
+              <li className="">
                 <Link className="" to={"/user"}>
                   Saved jobs
                 </Link>

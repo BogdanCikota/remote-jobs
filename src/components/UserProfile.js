@@ -1,5 +1,4 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
 import Job from "./jobList_components/Job";
 
 function UserProfile() {
@@ -12,13 +11,20 @@ function UserProfile() {
 
   const { allJobs } = jobsState;
 
- 
+  const globalState = useSelector((store) => store["global"])
+
+ const {openFilters} = globalState;
 
   return (
-    <main class=" md:mt-20 grid mb-2 md:mx-auto md:w-2/3 items-start gap-4">
-      <Link to="/" className="underline font-semibold lg:text-lg">
-        &#8592; back
-      </Link>
+    <main class=" md:mt-16 grid mb-2 md:mx-auto md:w-2/3 items-start gap-4">
+    
+     <div
+          className={`${
+            openFilters ? `md:bg-opacity-30 bg-blue-400` : `bg-blue-300`
+          } p-1 text-center text-white mb-4 md:rounded-b-full xl:p-1.5`}
+        >
+          Saved Jobs
+        </div>
       
       <div className="jobs-container">
         {user && user.likedJobs.length > 0 ? 
@@ -27,7 +33,7 @@ function UserProfile() {
               
               return (
                 likedJob === job.id && (
-                  <Job fromUserPage={true} key={index} job={job} />
+                  <Job key={index} job={job} />
                 )
               );
             })

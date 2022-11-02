@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as HeartRed } from "../assets/icons/heart-red.svg";
 import { ReactComponent as HeartWhite } from "../assets/icons/heart-white.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +17,11 @@ import { login } from "../redux/features/user/userSlice";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 function JobDescription() {
-  const location = useLocation();
+  const params = useParams();
+  const jobId = params.jobId;
+
+  const [job, setJob] = useState(null);
+
   const history = useNavigate();
   const [dateStr, setDateStr] = useState();
   const [jobDate, setJobDate] = useState();
@@ -28,6 +31,10 @@ function JobDescription() {
   const user = useSelector((state) => {
     return state.persistedReducer.user;
   });
+
+  const jobsState = useSelector((store) => store["jobs"]);
+
+  const { allJobs } = jobsState;
 
   const app = initializeApp(config.firebaseConfig);
 
@@ -105,11 +112,9 @@ function JobDescription() {
                       likedJobs: [...snapshot.data().likedJobs, id],
                     })
                   )
-                )
+                );
           }
         });
-
-        
       })
       .catch((error) => {
         console.log(error);
@@ -117,10 +122,11 @@ function JobDescription() {
   };
 
   useEffect(() => {
-    if (location.state.job === undefined) {
-      history.push("/");
-    } else {
-      setDateStr(location.state.job.publication_date);
+    allJobs.find(
+      (foundJob) => foundJob.id === Number(jobId) && setJob(foundJob)
+    );
+    if (job !== null) {
+      setDateStr(job.publication_date);
       let date = new Date(dateStr + "Z");
       setJobDate(date.toUTCString().slice(5, 16));
 
@@ -137,59 +143,45 @@ function JobDescription() {
         }
       }
     }
-  }, [location.state.job, history, dateStr]);
+  }, [job, history, dateStr, navigate, allJobs, jobId, dispatch]);
 
   return (
     <div>
-      {location.state.job !== undefined && (
+      {job !== null && (
         <div className="md:mt-16 xl:mt-16 m-auto max-w-5xl xl:p-4 text-gray-800">
-          <Link
-            to={location.state.fromUserPage ? "/user" : "/"}
-            className="ml-2 underline font-semibold lg:text-lg"
-          >
-            {" "}
-            &#8592; back
-          </Link>
 
           <div className="xl:flex gap-2 px-4 xl:px-0 relative">
             <div className="w-20 my-4 h-20 xl:border xl:my-0 xl:p-3 xl:m-0 xl:w-auto xl:h-auto self-center">
               <img
                 className="rounded-full xl:rounded-none"
-                src={`https://remotive.io/job/${location.state.job.id}/logo`}
-                alt={`logo ${location.state.job.company_name}`}
+                src={`https://remotive.io/job/${job.id}/logo`}
+                alt={`logo ${job.company_name}`}
               />
             </div>
 
             <div className="font-semibold p-2 xl:grid gap-2">
               <h3>
-                <span className="font-bold">
-                  {location.state.job.company_name}
-                </span>{" "}
+                <span className="font-bold">{job.company_name}</span>{" "}
               </h3>
-              <h2>Job title: {location.state.job.title}</h2>
+              <h2>Job title: {job.title}</h2>
               <p>
-                Category:{" "}
-                <span className="font-normal">
-                  {location.state.job.category}
-                </span>{" "}
+                Category: <span className="font-normal">{job.category}</span>{" "}
               </p>
               <div>
                 <div className="inline">
-                  {location.state.job.candidate_required_location === "" ? (
+                  {job.candidate_required_location === "" ? (
                     <span>/</span>
                   ) : (
                     <span className="font-normal">
-                      {location.state.job.candidate_required_location}
+                      {job.candidate_required_location}
                     </span>
                   )}{" "}
                 </div>{" "}
                 /
                 <div className="inline">
                   {" "}
-                  {location.state.job_type ? (
-                    <span className="font-normal">
-                      {location.state.job_type}
-                    </span>
+                  {job.job_type ? (
+                    <span className="font-normal">{job.job_type}</span>
                   ) : (
                     <span>/</span>
                   )}{" "}
@@ -200,40 +192,34 @@ function JobDescription() {
               </div>
             </div>
             <div className="HeartRed flex-1 grid justify-end z-0 absolute top-7 right-12 md:top-4 ">
-              {user &&
-              user.likedJobs.find((job) => job === location.state.job.id) ? (
-                <HeartRed
-                  className="cursor-pointer"
-                  onClick={() => {
-                    removeLikedJob(location.state.job.id);
-                  }}
-                />
-              ) : (
-                <HeartWhite
-                  className="cursor-pointer"
-                  onClick={() => {
-                    if (user) {
-                      addLikedJob(location.state.job.id);
-                    } else {
-                      signInWithGoogle(location.state.job.id);
-                    }
-                  }}
-                />
-              )}
+              {user && user.likedJobs.find((likedJob) => likedJob === job.id)
+                ? job !== null && (
+                    <HeartRed
+                      className="cursor-pointer"
+                      onClick={() => {
+                        removeLikedJob(job.id);
+                      }}
+                    />
+                  )
+                : job !== null && (
+                    <HeartWhite
+                      className="cursor-pointer"
+                      onClick={() => {
+                        if (user) {
+                          addLikedJob(job.id);
+                        } else {
+                          signInWithGoogle(job.id);
+                        }
+                      }}
+                    />
+                  )}
             </div>
           </div>
 
           <div
             className="border job-description py-3 px-5 w-screen overflow-scroll sm:w-full sm:overflow-visible grid gap-4 leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: location.state.job.description }}
+            dangerouslySetInnerHTML={{ __html: job.description }}
           ></div>
-          <Link
-            to={location.state.fromUserPage ? "/user" : "/"}
-            className="ml-2 underline font-semibold lg:text-lg"
-          >
-            {" "}
-            &#8592; back
-          </Link>
         </div>
       )}
     </div>

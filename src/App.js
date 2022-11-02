@@ -11,7 +11,11 @@ import AuthRoute from "./firebase/AuthRoute";
 
 //redux
 import { useDispatch, useSelector } from "react-redux";
-import { getJobs, getCategories, getAllJobs } from "./redux/features/jobs/jobsSlice";
+import {
+  getJobs,
+  getCategories,
+  getAllJobs,
+} from "./redux/features/jobs/jobsSlice";
 import UserProfile from "./components/UserProfile";
 
 function App() {
@@ -48,7 +52,8 @@ function App() {
                 </AuthRoute>
               }
             />
-            <Route path="/JobDescription" element={<JobDescription />} />
+
+            <Route path=":jobId" element={<JobDescription />} />
           </Routes>
         )}
 

@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setJobPositionTop } from "../../redux/features/globalSlice";
 
-function Job({ job }) {
+function Job({ job, fromUserProfile }) {
   const dispatch = useDispatch();
 
   return (
@@ -13,7 +13,7 @@ function Job({ job }) {
           : dispatch(setJobPositionTop(e.target.offsetTop - 100));
       }}
       className={` job border-b  hover:bg-gray-50 p-4 block xl:p-4 xl:pl-6 lg:flex justify-between `}
-      to={`/${job.id}`}
+      to={`/${fromUserProfile ? 'saved/'+job.id : job.id}`}
     >
       <div className="flex gap-4 xl:gap-5">
         <img

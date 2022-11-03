@@ -16,7 +16,7 @@ function UserProfile() {
  const {openFilters} = globalState;
 
   return (
-    <main class=" md:mt-16 grid mb-2 md:mx-auto md:w-2/3 items-start gap-4">
+    <main className=" md:mt-16 grid mb-2 md:mx-auto md:w-2/3 items-start gap-4">
     
      <div
           className={`${
@@ -28,12 +28,12 @@ function UserProfile() {
       
       <div className="jobs-container">
         {user && user.likedJobs.length > 0 ? 
-          [...user.likedJobs].reverse().map((likedJob) =>
+          [...user.likedJobs].reverse().map((likedJobId) =>
             allJobs.map((job, index) => {
               
               return (
-                likedJob === job.id && (
-                  <Job key={index} job={job} />
+                likedJobId === job.id && (
+                  <Job fromUserProfile={true} key={index} job={job} />
                 )
               );
             })

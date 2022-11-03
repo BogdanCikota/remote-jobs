@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ReactComponent as HeartRed } from "../assets/icons/heart-red.svg";
 import { ReactComponent as HeartWhite } from "../assets/icons/heart-white.svg";
+import swipe from "../assets/icons/swipe.png";
 import { useDispatch, useSelector } from "react-redux";
 import { initializeApp } from "firebase/app";
 import {
@@ -21,8 +22,6 @@ function JobDescription() {
   const jobId = params.jobId;
 
   const [job, setJob] = useState(null);
-
-  const history = useNavigate();
   const [dateStr, setDateStr] = useState();
   const [jobDate, setJobDate] = useState();
   const auth = getAuth();
@@ -34,7 +33,7 @@ function JobDescription() {
 
   const jobsState = useSelector((store) => store["jobs"]);
 
-  const { allJobs } = jobsState;
+  const { jobs, allJobs } = jobsState;
 
   const app = initializeApp(config.firebaseConfig);
 
@@ -143,12 +142,119 @@ function JobDescription() {
         }
       }
     }
-  }, [job, history, dateStr, navigate, allJobs, jobId, dispatch]);
+  }, [job, dateStr, navigate, allJobs, jobId, dispatch]);
+
+  const handlePrev = () => {
+    params.saved
+      ? user.likedJobs.find(
+          (foundId, index) =>
+            foundId === job.id &&
+            index + 1 <= jobs.length - 1 &&
+            allJobs.find(
+              (foundJob) =>
+                foundJob.id === user.likedJobs[index + 1] &&
+                navigate(
+                  `/${params.saved ? "saved/" + foundJob.id : foundJob.id}`
+                )
+            )
+        )
+      : jobs.find(
+          (foundJob, index) =>
+            foundJob.id === job.id &&
+            index - 1 >= 0 &&
+            navigate(
+              `/${
+                params.saved
+                  ? "saved/" + jobs[index - 1].id
+                  : jobs[index - 1].id
+              }`
+            )
+        );
+  };
+
+  const handleNext = () => {
+    params.saved
+      ? user.likedJobs.find(
+          (foundId, index) =>
+            foundId === job.id &&
+            index - 1 >= 0 &&
+            allJobs.find(
+              (foundJob) =>
+                foundJob.id === user.likedJobs[index - 1] &&
+                navigate(
+                  `/${params.saved ? "saved/" + foundJob.id : foundJob.id}`
+                )
+            )
+        )
+      : jobs.find(
+          (foundJob, index) =>
+            foundJob.id === job.id &&
+            index + 1 <= jobs.length - 1 &&
+            navigate(
+              `/${
+                params.saved
+                  ? "saved/" + jobs[index + 1].id
+                  : jobs[index + 1].id
+              }`
+            )
+        );
+  };
+
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  // the required distance between touchStart and touchEnd to be detected as a swipe
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+    if (isLeftSwipe || isRightSwipe) {
+      if (isLeftSwipe) {
+        // console.log("swipe left");
+        handleNext();
+        // navigate(`/123456`)
+        // console.log(job.id);
+      } else {
+        // console.log("swipe right");
+        handlePrev();
+      }
+    }
+    // add your conditional logic here
+  };
 
   return (
     <div>
       {job !== null && (
-        <div className="md:mt-16 xl:mt-16 m-auto max-w-5xl xl:p-4 text-gray-800">
+        <div
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          className="md:mt-16 m-auto max-w-6xl md:p-4 md:px-20 lg:px-40 text-gray-800 relative"
+        >
+          <img src={swipe} alt="swipe icon" className="md:hidden fade-out w-40 absolute ml-auto mr-auto left-0 right-0 top-20" />
+          <div
+            onClick={handlePrev}
+            className="hidden md:grid z-10 cursor-pointer text-2xl absolute left-0 w-24  h-screen justify-center items-center"
+          >
+            <span className="relative bottom-14">&#8810;</span>
+          </div>
+
+          <div
+            onClick={handleNext}
+            className="hidden md:grid z-10 cursor-pointer text-2xl absolute right-0 w-24  h-screen justify-end justify-center  items-center"
+          >
+            <span className="relative bottom-14">&#8811;</span>
+          </div>
 
           <div className="xl:flex gap-2 px-4 xl:px-0 relative">
             <div className="w-20 my-4 h-20 xl:border xl:my-0 xl:p-3 xl:m-0 xl:w-auto xl:h-auto self-center">

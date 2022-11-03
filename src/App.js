@@ -53,6 +53,8 @@ function App() {
               }
             />
 
+            <Route path="/:saved/:jobId" element={<JobDescription />} />
+
             <Route path=":jobId" element={<JobDescription />} />
           </Routes>
         )}

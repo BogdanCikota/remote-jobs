@@ -7,18 +7,17 @@ import {
   setPageNum,
 } from "../../../redux/features/globalSlice";
 
-function PrevButton({ pageNumElement }) {
+function PrevButton() {
   const dispatch = useDispatch();
   const globalState = useSelector((store) => store["global"]);
-  const { numOfResults, fromIndex, toIndex } = globalState;
+  const { numOfResults, fromIndex, toIndex, pageNum } = globalState;
 
   return (
     <button
       disabled={fromIndex === 0 ? true : false}
       className="font-bold bg-blue-400 hover:bg-blue-500 px-2 pb-0.5 rounded-full text-xl text-white"
       onClick={() => {
-        let pageNumCurrent = pageNumElement.innerHTML;
-        dispatch(setPageNum(pageNumCurrent - 1));
+        dispatch(setPageNum(pageNum - 1));
 
         dispatch(setfromIndex(fromIndex - numOfResults));
         dispatch(settoIndex(toIndex - numOfResults));

@@ -229,7 +229,6 @@ function JobDescription() {
         handlePrev();
       }
     }
-    // add your conditional logic here
   };
 
   return (
@@ -241,7 +240,12 @@ function JobDescription() {
           onTouchEnd={onTouchEnd}
           className="md:mt-16 m-auto max-w-6xl md:p-4 md:px-20 lg:px-40 text-gray-800 relative"
         >
-          <img src={swipe} alt="swipe icon" className="md:hidden fade-out w-40 absolute ml-auto mr-auto left-0 right-0 top-20" />
+          <button className="mb-2" onClick={() => params.saved ? navigate('/user') : navigate("/")}>&larr; back to the list</button>
+          <img
+            src={swipe}
+            alt="swipe icon"
+            className="md:hidden fade-out w-40 absolute ml-auto mr-auto left-0 right-0 top-20"
+          />
           <div
             onClick={handlePrev}
             className="hidden md:grid z-10 cursor-pointer text-2xl absolute left-0 w-24  h-screen justify-center items-center"

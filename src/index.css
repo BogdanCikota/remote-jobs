@@ -2,6 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
+@-webkit-keyframes fadeOut {
+    0% { opacity: 1;}
+    99% { opacity: 0.01}
+    100% { opacity: 0}
+}  
+@keyframes fadeOut {
+    0% { opacity: 1;}
+    99% { opacity: 0.01}
+    100% { opacity: 0}
+}
+
 .job-description div, .job-description span, .job-description applet, .job-description object, .job-description iframe,
 .job-description h1, .job-description h2, .job-description h3, .job-description h4, .job-description h5, .job-description h6, .job-description p, .job-description blockquote, .job-description pre,
 .job-description a, .job-description abbr, .job-description acronym, .job-description address, .job-description big, .job-description cite, .job-description code,
@@ -154,3 +165,8 @@
 	grid-template-rows: 2rem 1fr;
 }
 
+.fade-out {
+    display: block;
+    animation: fadeOut 2s;
+    animation-fill-mode: forwards;
+}

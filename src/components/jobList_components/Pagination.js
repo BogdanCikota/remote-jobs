@@ -3,11 +3,16 @@ import PrevButton from "./pagination_components/PrevButton";
 import NextButton from "./pagination_components/NextButton";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setfromIndex, setgoToPage, setJobPositionTop, settoIndex, setPageNum } from "../../redux/features/globalSlice";
+import {
+  setfromIndex,
+  setgoToPage,
+  setJobPositionTop,
+  settoIndex,
+  setPageNum,
+} from "../../redux/features/globalSlice";
 
 function Pagination() {
   const [paginationNums, setPaginationNums] = useState(0);
-  const pageNumElement = document.querySelector(".pageNum");
   const globalState = useSelector((store) => store["global"]);
   const { pages, chunkedPages, goToPage, numOfResults } = globalState;
   const dispatch = useDispatch();
@@ -22,9 +27,7 @@ function Pagination() {
 
   return (
     <div className="m-auto my-4 flex gap-6 justify-center mb-1.5 items-center px-4">
-      <PrevButton
-        pageNumElement={pageNumElement}
-      />
+      <PrevButton />
       {pages && pages.length > 100 && !goToPage && (
         <button
           onClick={(e) => {
@@ -57,11 +60,7 @@ function Pagination() {
 
       {chunkedPages.length > 0 &&
         pages.length < 100 &&
-        pages.length >= paginationNums && (
-          <Pages
-            chunk={chunkedPages[0]}
-          />
-        )}
+        pages.length >= paginationNums && <Pages chunk={chunkedPages[0]} />}
 
       {chunkedPages.length > 0 && pages.length < paginationNums && (
         <div className="flex flex-wrap gap-2 justify-center">
@@ -84,9 +83,7 @@ function Pagination() {
         </div>
       )}
 
-      <NextButton
-        pageNumElement={pageNumElement}
-      />
+      <NextButton />
     </div>
   );
 }

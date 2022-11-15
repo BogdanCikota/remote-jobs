@@ -134,7 +134,7 @@ function Header() {
           }} onMouseLeave={() => setActive(false)} className="dropdown relative  tracking-wide cursor-pointer  text-white sm:mr-3  pl-3 py-1  md:px-3` ">
             My Profile <span className="relative bottom-0.5">&#8964;</span>
             <ul className={`${isActive ? 'block' : 'hidden'}  dropdown-content absolute left-0 w-28 pt-5 text-white bg-blue-400 text-black`}>
-              <li className="">
+              <li onClick={()=> dispatch(setJobPositionTop(0))}>
                 <Link className="" to={"/user"}>
                   Saved jobs
                 </Link>

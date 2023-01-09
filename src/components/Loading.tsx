@@ -1,8 +1,9 @@
 import {useSelector} from 'react-redux';
+import { RootState } from '../redux/store';
 
 function Loading() {
 
-    const jobsState = useSelector((store) => store["jobs"]);
+    const jobsState = useSelector((store: RootState) => store["jobs"]);
     
     return (
         <div className='loading grid gap-0.5 mb-2 md:mx-40 md:mt-16 xl:mt-16 xl:m-auto xl:w-2/3'>

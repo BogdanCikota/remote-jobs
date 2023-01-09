@@ -6,10 +6,11 @@ import {
   settoIndex,
   setPageNum,
 } from "../../../redux/features/globalSlice";
+import { RootState } from "../../../redux/store";
 
 function PrevButton() {
   const dispatch = useDispatch();
-  const globalState = useSelector((store) => store["global"]);
+  const globalState = useSelector((store: RootState) => store["global"]);
   const { numOfResults, fromIndex, toIndex, pageNum } = globalState;
 
   return (

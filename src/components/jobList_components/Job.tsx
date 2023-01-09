@@ -10,7 +10,7 @@ type JobProps = {
     category: string;
     candidate_required_location: string
   };
-  fromUserProfile: boolean
+  fromUserProfile?: boolean
 }
 
 function Job({ job, fromUserProfile }: JobProps) {

@@ -13,10 +13,11 @@ import {
   setPageNum
 } from "../../redux/features/globalSlice";
 import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux/store";
 
 function Filters() {
   const dispatch = useDispatch();
-  const jobsState = useSelector((store) => store["jobs"]);
+  const jobsState = useSelector((store: RootState) => store["jobs"]);
 
   const [inputLimit, setInputLimit] = useState(0);
   const [selectedCategory, setselectedCategory] = useState("");
@@ -44,10 +45,10 @@ function Filters() {
     setInputNumOfResults(10);
     dispatch(setOpenFilters(false));
     //dom
-    document.querySelector("#limit").value = "";
-    document.querySelector("select").selectedIndex = 0;
-    document.querySelector("#search").value = "";
-    document.querySelector("#numOfResults").value = "";
+    (document.querySelector("#limit") as HTMLInputElement).value = "";
+    (document.querySelector("select") as HTMLSelectElement).selectedIndex = 0;
+    (document.querySelector("#search") as HTMLInputElement).value = "";
+    (document.querySelector("#numOfResults") as HTMLInputElement).value = "";
   };
 
   return (
@@ -80,7 +81,7 @@ function Filters() {
       >
         <option>Choose a job category</option>
         <option>All jobs</option>
-        {jobsState.categories.map((category, index) => (
+        {jobsState.categories.map((category: {slug:string; name:string}, index) => (
           <option key={index} value={category.slug}>
             {category.name}
           </option>
@@ -111,7 +112,7 @@ function Filters() {
           id="limit"
           min="1"
           onChange={(e) => {
-            setInputLimit(e.target.value);
+            setInputLimit(Number(e.target.value));
           }}
         />
       </div>
@@ -125,7 +126,7 @@ function Filters() {
           type="number"
           id="numOfResults"
           min="1"
-          onChange={(e) => { e.target.value !== '' ? setInputNumOfResults(e.target.value) : setInputNumOfResults(10)
+          onChange={(e) => { e.target.value !== '' ? setInputNumOfResults(Number(e.target.value)) : setInputNumOfResults(10)
           }}
         />
       </div>

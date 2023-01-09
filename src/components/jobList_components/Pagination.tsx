@@ -10,11 +10,13 @@ import {
   settoIndex,
   setPageNum,
 } from "../../redux/features/globalSlice";
+import { RootState } from "../../redux/store";
 
 function Pagination() {
   const [paginationNums, setPaginationNums] = useState(0);
-  const globalState = useSelector((store) => store["global"]);
-  const { pages, chunkedPages, goToPage, numOfResults } = globalState;
+  const globalState = useSelector((store: RootState) => store["global"]);
+  const { pages, goToPage, numOfResults } = globalState;
+  let chunkedPages: number[][] = globalState.chunkedPages;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +34,7 @@ function Pagination() {
         <button
           onClick={(e) => {
             dispatch(setgoToPage(!goToPage));
-            dispatch(setJobPositionTop(e.target.offsetTop));
+            dispatch(setJobPositionTop((e.target as HTMLElement).offsetTop));
           }}
           className="rounded-lg px-1 bg-blue-400 hover:bg-blue-500 text-white"
         >

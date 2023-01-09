@@ -10,8 +10,8 @@ import {
 import { RootState } from "../../../redux/store";
 
 type PagesProps = {
-  lastChunk: number;
-  chunkIndex: number;
+  lastChunk?: number;
+  chunkIndex?: number;
   chunk: number[];
 };
 
@@ -38,7 +38,7 @@ function Pages({ lastChunk, chunkIndex, chunk }: PagesProps) {
         dispatch(setJobPositionTop(0));
       }}
     >
-      {pages && pages.length > 100 ? (
+      {pages && pages.length > 100 && chunkIndex ? (
         <option>{`${(chunkIndex + 1) * 100 - 100 + 1}...${
           lastChunk === chunkIndex
             ? +lastNumInChunk + +1

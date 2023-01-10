@@ -1,14 +1,24 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { RootState } from "../../store";
 import { setPages, setpagesCounter } from "../globalSlice";
 
-const initialState = {
+type JobsType = {
+  loading: boolean;
+  jobs: any[];
+  hasData: boolean;
+  categories: any[];
+  allJobs: any[];
+  errorMessage: string
+};
+
+const initialState: JobsType = {
   loading: false,
   jobs: [],
-  errorMessage: null,
   hasData: true,
   categories: [],
   allJobs: [],
+  errorMessage: ''
 };
 
 export const getCategories = createAsyncThunk(
@@ -21,12 +31,19 @@ export const getCategories = createAsyncThunk(
   }
 );
 
+type AsyncProps = {
+  limit: number;
+  category: string;
+  search: string;
+};
+
 export const getJobs = createAsyncThunk(
   "jobs/getJobs",
-  async ({ limit, category, search }, thunkAPI) => {
+  async ({ limit, category, search }: AsyncProps, thunkAPI) => {
     // console.log({ limit, category, search });
-    const globalState = thunkAPI.getState().global;
-    const { numOfResults } = globalState;
+    
+    const state = thunkAPI.getState() as RootState;
+    const { numOfResults } = state.global;
 
     let dataUrl = `https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`;
     let response = await axios.get(dataUrl);
@@ -46,19 +63,17 @@ export const getJobs = createAsyncThunk(
   }
 );
 
-export const getAllJobs = createAsyncThunk(
-  "jobs/getAllJobs",
-  async () => {
-    const limit = 0;
-    const category = '';
-    const search = '';
-    let dataUrl = `https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`;
-    let response = await axios.get(dataUrl);
-    // console.log("all jobs: ", response.data.jobs);
+export const getAllJobs = createAsyncThunk("jobs/getAllJobs", async () => {
+  const limit = 0;
+  const category = "";
+  const search = "";
+  let dataUrl = `https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`;
+  let response = await axios.get(dataUrl);
+  // console.log("all jobs: ", response.data.jobs);
 
-    return response.data;
-  }
-);
+  return response.data;
+});
+
 
 const jobsSlice = createSlice({
   name: "jobs",

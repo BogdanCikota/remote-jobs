@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setChunkedPages } from "../redux/features/globalSlice";
 import { RootState } from "../redux/store";
 
-function JobList() {
+function JobList({children}:any) {
   const jobsState = useSelector((store: RootState) => store["jobs"]);
   const { jobs } = jobsState;
   const globalState = useSelector((store: RootState) => store["global"]);

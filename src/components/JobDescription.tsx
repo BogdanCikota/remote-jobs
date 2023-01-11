@@ -16,22 +16,34 @@ import { config } from "../firebase/firebaseConfig";
 
 import { login } from "../redux/features/user/userSlice";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { RootState } from "../redux/store";
+
+type JobsType = {
+  publication_date: any;
+  id: number;
+  company_name: string;
+  title: string;
+  category: string;
+  candidate_required_location: string;
+  job_type: string;
+  description: string;
+}
 
 function JobDescription() {
   const params = useParams();
   const jobId = params.jobId;
 
-  const [job, setJob] = useState(null);
+  const [job, setJob] = useState<JobsType | null>(null);
   const [dateStr, setDateStr] = useState();
-  const [jobDate, setJobDate] = useState();
+  const [jobDate, setJobDate] = useState('');
   const auth = getAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const user = useSelector((state) => {
+  const user = useSelector((state: RootState) => {
     return state.persistedReducer.user;
   });
 
-  const jobsState = useSelector((store) => store["jobs"]);
+  const jobsState = useSelector((store: RootState) => store["jobs"]);
 
   const { jobs, allJobs } = jobsState;
 
@@ -39,13 +51,13 @@ function JobDescription() {
 
   const db = getFirestore(app);
 
-  const addLikedJob = (id) => {
-    user.likedJobs.find((jobId) => jobId === id)
+  const addLikedJob = (id: number) => {
+    user && user.likedJobs.find((jobId) => jobId === id)
       ? console.log("job with that id already exist")
-      : setDoc(doc(db, "users", user.uid), {
+      : user && setDoc(doc(db, "users", user.uid), {
           likedJobs: [...user.likedJobs, id],
         }).then(
-          dispatch(
+          dispatch<any>(
             login({
               ...user,
               likedJobs: [...user.likedJobs, id],
@@ -54,13 +66,13 @@ function JobDescription() {
         );
   };
 
-  const removeLikedJob = (id) => {
-    let updatedArr = user.likedJobs.filter((job) => job !== id);
+  const removeLikedJob = (id: number) => {
+    let updatedArr = user && user.likedJobs.filter((job) => job !== id);
 
-    updateDoc(doc(db, "users", user.uid), {
+    user &&  updateDoc(doc(db, "users", user.uid), {
       likedJobs: updatedArr,
     }).then(
-      dispatch(
+      dispatch<any>(
         login({
           ...user,
           likedJobs: updatedArr,
@@ -70,7 +82,7 @@ function JobDescription() {
     navigate("/user");
   };
 
-  const signInWithGoogle = async (id) => {
+  const signInWithGoogle = async (id: number) => {
     signInWithPopup(auth, new GoogleAuthProvider())
       .then((response) => {
         // console.log(response.user);
@@ -83,7 +95,7 @@ function JobDescription() {
             setDoc(doc(db, "users", response.user.uid), {
               likedJobs: [id],
             }).then(
-              dispatch(
+              dispatch<any>(
                 login({
                   uid: response.user.uid,
                   name: response.user.displayName,
@@ -93,22 +105,22 @@ function JobDescription() {
             );
           } else {
             console.log("user with that id already exists");
-            snapshot.data().likedJobs.find((jobId) => jobId === id)
+            snapshot.data()?.likedJobs.find((jobId: number) => jobId === id)
               ? dispatch(
                   login({
                     uid: response.user.uid,
                     name: response.user.displayName,
-                    likedJobs: snapshot.data().likedJobs,
+                    likedJobs: snapshot.data()?.likedJobs,
                   })
                 )
               : setDoc(doc(db, "users", response.user.uid), {
-                  likedJobs: [...snapshot.data().likedJobs, id],
+                  likedJobs: [...snapshot.data()?.likedJobs, id],
                 }).then(
-                  dispatch(
+                  dispatch<any>(
                     login({
                       uid: response.user.uid,
                       name: response.user.displayName,
-                      likedJobs: [...snapshot.data().likedJobs, id],
+                      likedJobs: [...snapshot.data()?.likedJobs, id],
                     })
                   )
                 );
@@ -130,7 +142,7 @@ function JobDescription() {
       setJobDate(date.toUTCString().slice(5, 16));
 
       window.scroll(0, 0);
-      let jobDescription = document.querySelector(".job-description");
+      let jobDescription = document.querySelector(".job-description") as HTMLElement;
       for (let i = 0; i < jobDescription.children.length; i++) {
         if (
           jobDescription.children[i].innerHTML === "&nbsp;" ||
@@ -146,9 +158,9 @@ function JobDescription() {
 
   const handlePrev = () => {
     params.saved
-      ? user.likedJobs.find(
+      ? user && user.likedJobs.find(
           (foundId, index) =>
-            foundId === job.id &&
+          job && foundId === job.id &&
             index + 1 <= jobs.length - 1 &&
             allJobs.find(
               (foundJob) =>
@@ -160,7 +172,7 @@ function JobDescription() {
         )
       : jobs.find(
           (foundJob, index) =>
-            foundJob.id === job.id &&
+            job && foundJob.id === job.id &&
             index - 1 >= 0 &&
             navigate(
               `/${
@@ -174,9 +186,9 @@ function JobDescription() {
 
   const handleNext = () => {
     params.saved
-      ? user.likedJobs.find(
+      ? user && user.likedJobs.find(
           (foundId, index) =>
-            foundId === job.id &&
+          job && foundId === job.id &&
             index - 1 >= 0 &&
             allJobs.find(
               (foundJob) =>
@@ -188,7 +200,7 @@ function JobDescription() {
         )
       : jobs.find(
           (foundJob, index) =>
-            foundJob.id === job.id &&
+          job && foundJob.id === job.id &&
             index + 1 <= jobs.length - 1 &&
             navigate(
               `/${
@@ -206,12 +218,12 @@ function JobDescription() {
   // the required distance between touchStart and touchEnd to be detected as a swipe
   const minSwipeDistance = 50;
 
-  const onTouchStart = (e) => {
+  const onTouchStart = (e: any) => {
     setTouchEnd(null); // otherwise the swipe is fired even with usual touch events
     setTouchStart(e.targetTouches[0].clientX);
   };
 
-  const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX);
+  const onTouchMove = (e: any) => setTouchEnd(e.targetTouches[0].clientX);
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;

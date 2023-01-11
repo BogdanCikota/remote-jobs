@@ -2,15 +2,26 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { setJobPositionTop } from "../../redux/features/globalSlice";
 
-function Job({ job, fromUserProfile }) {
+type JobProps = {
+  job: {
+    id: number;
+    company_name: string;
+    title: string;
+    category: string;
+    candidate_required_location: string
+  };
+  fromUserProfile?: boolean
+}
+
+function Job({ job, fromUserProfile }: JobProps) {
   const dispatch = useDispatch();
 
   return (
     <Link
       onClick={(e) => {
         window.screen.width < 640
-          ? dispatch(setJobPositionTop(e.target.offsetTop - 40))
-          : dispatch(setJobPositionTop(e.target.offsetTop - 100));
+          ? dispatch(setJobPositionTop((e.target as HTMLElement).offsetTop - 40))
+          : dispatch(setJobPositionTop((e.target as HTMLElement).offsetTop - 100));
       }}
       className={` job border-b  hover:bg-gray-50 p-4 block xl:p-4 xl:pl-6 lg:flex justify-between `}
       to={`/${fromUserProfile ? 'saved/'+job.id : job.id}`}

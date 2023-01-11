@@ -1,4 +1,4 @@
-function Footer({isLoading}) {
+function Footer({isLoading}: {isLoading: boolean}) {
 
     return (
         <footer className={`${isLoading && `fixed bottom-0 left-0 w-full`} text-white mt-4 text-center`}>

@@ -1,20 +1,21 @@
 import { useSelector } from "react-redux";
 import Job from "./jobList_components/Job";
 import { useNavigate } from "react-router-dom";
+import { RootState } from "../redux/store";
 
 function UserProfile() {
   const navigate = useNavigate();
 
-  const user = useSelector((state) => {
+  const user = useSelector((state: RootState | any) => {
     // console.log(state.persistedReducer.user);
     return state.persistedReducer.user;
   });
 
-  const jobsState = useSelector((store) => store["jobs"]);
+  const jobsState = useSelector((store: RootState) => store["jobs"]);
 
   const { allJobs } = jobsState;
 
-  const globalState = useSelector((store) => store["global"]);
+  const globalState = useSelector((store: RootState) => store["global"]);
 
   const { openFilters } = globalState;
 
@@ -36,8 +37,8 @@ function UserProfile() {
 
       <div className="jobs-container">
         {user && user.likedJobs.length > 0 ? (
-          [...user.likedJobs].reverse().map((likedJobId) =>
-            allJobs.map((job, index) => {
+          [...user.likedJobs].reverse().map((likedJobId: string) =>
+            allJobs.map((job: any, index: number) => {
               return (
                 likedJobId === job.id && (
                   <Job fromUserProfile={true} key={index} job={job} />

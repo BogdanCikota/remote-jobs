@@ -6,80 +6,82 @@ import { initializeApp } from "firebase/app";
 import { getDoc, getFirestore } from "firebase/firestore";
 import { config } from "../firebase/firebaseConfig";
 import {
-  getAuth,
-  GoogleAuthProvider,
-  signInWithPopup,
-  signOut,
+getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+signOut,
 } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
 
 import Filters from "./header_components/Filters";
 import {
-  setOpenFilters,
-  setJobPositionTop,
+setOpenFilters,
+setJobPositionTop,
 } from "../redux/features/globalSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { RootState } from "../redux/store";
 
 const app = initializeApp(config.firebaseConfig);
 
 const db = getFirestore(app);
 
 function Header() {
-  const auth = getAuth();
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const globalState = useSelector((store) => store["global"]);
-  const { openFilters } = globalState;
-  const userState = useSelector((store) => store["persistedReducer"].user);
-  const [isActive, setActive] = useState(false);
+const auth = getAuth();
+const navigate = useNavigate();
+const dispatch = useDispatch();
+const globalState = useSelector((store: RootState) => store["global"]);
+const { openFilters } = globalState;
+const userState = useSelector((store: RootState) => store["persistedReducer"].user);
+const [isActive, setActive] = useState(false);
 
-  const signInWithGoogle = async () => {
-    signInWithPopup(auth, new GoogleAuthProvider())
-      .then((response) => {
-        // console.log(response.user);
+const signInWithGoogle = async () => {
+signInWithPopup(auth, new GoogleAuthProvider())
+.then((response) => {
+// console.log(response.user);
 
-        const docRef = doc(db, "users", response.user.uid);
+const docRef = doc(db, "users", response.user.uid);
 
-        getDoc(docRef).then((snapshot) => {
-          // console.log(snapshot.data());
-          if (snapshot.data() === undefined) {
-            setDoc(doc(db, "users", response.user.uid), {
-              likedJobs: [],
-            }).then(
-              dispatch(
-                login({
-                  uid: response.user.uid,
-                  name: response.user.displayName,
-                  likedJobs: [],
-                })
-              )
-            );
-          } else {
-            console.log("user with that id already exists");
-            dispatch(
-              login({
-                uid: response.user.uid,
-                name: response.user.displayName,
-                likedJobs: [...snapshot.data().likedJobs],
-              })
-            );
-          }
-        });
-
-        navigate("/user");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const signOutUser = async () => {
-    await signOut(auth).then(() => {
-      dispatch(logout());
+getDoc(docRef).then((snapshot) => {
+  // console.log(snapshot.data());
+  if (snapshot.data() === undefined) {
+    setDoc(doc(db, "users", response.user.uid), {
+      likedJobs: [],
+    }).then(() => {
+      dispatch(
+        login({
+          uid: response.user.uid,
+          name: response.user.displayName,
+          likedJobs: [],
+        })
+      );
     });
-    setActive(false);
-  };
+  } else {
+    console.log("user with that id already exists");
+    dispatch(
+      login({
+        uid: response.user.uid,
+        name: response.user.displayName,
+        likedJobs: [...snapshot.data()?.likedJobs],
+      })
+    );
+  }
+});
+
+navigate("/user");
+})
+.catch((error) => {
+console.log(error);
+});
+
+};
+
+const signOutUser = async () => {
+await signOut(auth).then(() => {
+dispatch(logout());
+});
+setActive(false);
+};
 
   return (
     <header

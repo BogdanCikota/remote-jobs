@@ -10,18 +10,19 @@ import ZeroResults from "./components/ZeroResults";
 import AuthRoute from "./firebase/AuthRoute";
 
 //redux
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {
   getJobs,
   getCategories,
   getAllJobs,
 } from "./redux/features/jobs/jobsSlice";
 import UserProfile from "./components/UserProfile";
+import { RootState, useAppDispatch } from "./redux/store";
 
 function App() {
-  const dispatch = useDispatch();
-  const jobsState = useSelector((store) => store["jobs"]);
-  const globalState = useSelector((store) => store["global"]);
+  const dispatch = useAppDispatch();
+  const jobsState = useSelector((store: RootState) => store["jobs"]);
+  const globalState = useSelector((store: RootState) => store["global"]);
 
   const { loading: isLoading = false, jobs = [] } = jobsState;
   const { category, search, limit, jobPositionTop, openFilters } = globalState;
@@ -33,7 +34,7 @@ function App() {
   }, [dispatch, limit, category, search]);
 
   return (
-    <HashRouter basemname="/">
+    <HashRouter basename="/">
       <div className={`${!isLoading && `grid`} App`}>
         <Header />
 
@@ -42,8 +43,8 @@ function App() {
         ) : jobs.length === 0 ? (
           <ZeroResults />
         ) : (
-          <Routes onClick={window.scrollTo(0, jobPositionTop)}>
-            <Route exact path="/" element={!openFilters && <JobList />}></Route>
+          <Routes >
+            <Route path="/" element={!openFilters && <JobList onClick={window.scrollTo(0, jobPositionTop)}/>}></Route>
             <Route
               path="/user"
               element={

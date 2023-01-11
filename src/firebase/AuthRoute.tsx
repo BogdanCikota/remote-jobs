@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 
-const AuthRoute = (props) => {
-  const { children } = props;
+type AuthRouteProps = {
+  children?: ReactNode
+}
+
+const AuthRoute = ({ children }: AuthRouteProps) => {
   const auth = getAuth();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);

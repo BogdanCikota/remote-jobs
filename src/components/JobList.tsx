@@ -4,11 +4,12 @@ import chunk from "lodash.chunk";
 import Pagination from "./jobList_components/Pagination";
 import { useSelector, useDispatch } from "react-redux";
 import { setChunkedPages } from "../redux/features/globalSlice";
+import { RootState } from "../redux/store";
 
-function JobList() {
-  const jobsState = useSelector((store) => store["jobs"]);
+function JobList({children}:any) {
+  const jobsState = useSelector((store: RootState) => store["jobs"]);
   const { jobs } = jobsState;
-  const globalState = useSelector((store) => store["global"]);
+  const globalState = useSelector((store: RootState) => store["global"]);
   const { pages, openFilters, fromIndex, numOfResults, toIndex, pageNum } = globalState;
   const dispatch = useDispatch();
 

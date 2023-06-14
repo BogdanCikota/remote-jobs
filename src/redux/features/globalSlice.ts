@@ -21,7 +21,7 @@ const initialState: GlobalState = {
   pages: [],
   numOfResults: 10,
   toIndex: 10,
-  category: "",
+  category: "software-dev",
   search: "",
   limit: 0,
   openFilters: false,

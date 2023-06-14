@@ -35,12 +35,12 @@ function Filters() {
   const resetFilters = () => {
     //api state
     dispatch(setLimit(0));
-    dispatch(setCategory(""));
+    dispatch(setCategory("software-dev"));
     dispatch(setSearch(""));
     dispatch(setNumOfResults(10));
     //local state
     setInputLimit(0);
-    setselectedCategory("");
+    setselectedCategory("software-dev");
     setInputSearch("");
     setInputNumOfResults(10);
     dispatch(setOpenFilters(false));
@@ -83,7 +83,7 @@ function Filters() {
         <option>All jobs</option>
         {jobsState.categories.map((category: {slug:string; name:string}, index) => (
           <option key={index} value={category.slug}>
-            {category.name}
+            {category.name === 'Software Development' ? (`Software Development - default`) : (category.name)}
           </option>
         ))}
       </select>

@@ -48,6 +48,8 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash.chunk": "^4.2.7",
+    "@types/react-dom": "^18.2.5",
     "autoprefixer": "^9.8.6",
     "postcss": "^7.0.36",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.4"

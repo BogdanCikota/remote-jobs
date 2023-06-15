@@ -44,10 +44,11 @@ export const getJobs = createAsyncThunk(
     
     const state = thunkAPI.getState() as RootState;
     const { numOfResults } = state.global;
+    let myLimit = limit !== 0 && limit;
 
-    let dataUrl = `https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`;
+    let dataUrl = `https://remotive.io/api/remote-jobs?limit=${myLimit}&category=${category}&search=${search}`;
     let response = await axios.get(dataUrl);
-    //console.log("jobs: ", response.data.jobs);
+    // console.log("jobs: ", response.data);
 
     let pagesArr = [];
 
@@ -64,12 +65,13 @@ export const getJobs = createAsyncThunk(
 );
 
 export const getAllJobs = createAsyncThunk("jobs/getAllJobs", async () => {
-  const limit = 0;
-  const category = "";
-  const search = "";
-  let dataUrl = `https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`;
+  // const limit = 0;
+  // const category = "";
+  // const search = "";
+  // let dataUrl = `https://remotive.io/api/remote-jobs?limit=${limit}&category=${category}&search=${search}`;
+  let dataUrl = `https://remotive.io/api/remote-jobs`;
   let response = await axios.get(dataUrl);
-  // console.log("all jobs: ", response.data.jobs);
+  console.log("all jobs: ", response.data);
 
   return response.data;
 });

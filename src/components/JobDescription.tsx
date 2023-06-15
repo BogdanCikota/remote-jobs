@@ -31,6 +31,7 @@ type JobsType = {
 
 function JobDescription() {
   const params = useParams();
+  
   const jobId = params.jobId;
 
   const [job, setJob] = useState<JobsType | null>(null);
@@ -133,9 +134,18 @@ function JobDescription() {
   };
 
   useEffect(() => {
+    //prvo pogledaj u jobs pa onda u allJobs
+
+    params.saved ? 
     allJobs.find(
       (foundJob) => foundJob.id === Number(jobId) && setJob(foundJob)
+    )
+    :
+    
+    jobs.find(
+      (foundJob) => foundJob.id === Number(jobId) && setJob(foundJob)
     );
+    
     if (job !== null) {
       setDateStr(job.publication_date);
       let date = new Date(dateStr + "Z");
@@ -154,7 +164,7 @@ function JobDescription() {
         }
       }
     }
-  }, [job, dateStr, navigate, allJobs, jobId, dispatch]);
+  }, [job, dateStr, navigate, allJobs, jobId, dispatch, jobs, params]);
 
   const handlePrev = () => {
     params.saved

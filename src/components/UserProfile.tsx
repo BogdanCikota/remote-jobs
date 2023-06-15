@@ -36,20 +36,24 @@ function UserProfile() {
       </div>
 
       <div className="jobs-container">
-        {user && user.likedJobs.length > 0 ? (
-          [...user.likedJobs].reverse().map((likedJobId: string) =>
-            allJobs.map((job: any, index: number) => {
-              return (
-                likedJobId === job.id && (
-                  <Job fromUserProfile={true} key={index} job={job} />
-                )
-              );
-            })
+        {allJobs.length > 0 ? (
+          user && user.likedJobs.length > 0 ? (
+            [...user.likedJobs].reverse().map((likedJobId: string) =>
+              allJobs.map((job: any, index: number) => {
+                return (
+                  likedJobId === job.id && (
+                    <Job fromUserProfile={true} key={index} job={job} />
+                  )
+                );
+              })
+            )
+          ) : (
+            <p className="font-serif italic text-center md:text-lg">
+              Your job list is empty.
+            </p>
           )
         ) : (
-          <p className="font-serif italic text-center md:text-lg">
-            Your job list is empty.
-          </p>
+          <p className="font-serif italic text-center md:text-lg">Loading...</p>
         )}
       </div>
     </main>
